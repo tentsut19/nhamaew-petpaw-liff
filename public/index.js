@@ -31,9 +31,9 @@ function validateValue(){
     var month = document.getElementById("month");
     var sterilization = document.getElementById("sterilization");
     var vaccine = document.getElementById("vaccine");
-    var historyDrugAllergy = document.getElementById("historyDrugAllergy");
+    // var historyDrugAllergy = document.getElementById("historyDrugAllergy");
     var surgery = document.getElementById("surgery");
-    var congenitalDisease = document.getElementById("congenitalDisease");
+    // var congenitalDisease = document.getElementById("congenitalDisease");
     var initialSymptoms = document.getElementById("initialSymptoms");
 
     var valid = true;
@@ -43,9 +43,9 @@ function validateValue(){
     valid = valid && addOrRemoveClassIsInvalid(month);
     valid = valid && addOrRemoveClassIsInvalid(sterilization);
     valid = valid && addOrRemoveClassIsInvalid(vaccine);
-    valid = valid && addOrRemoveClassIsInvalid(historyDrugAllergy);
+    // valid = valid && addOrRemoveClassIsInvalid(historyDrugAllergy);
     valid = valid && addOrRemoveClassIsInvalid(surgery);
-    valid = valid && addOrRemoveClassIsInvalid(congenitalDisease);
+    // valid = valid && addOrRemoveClassIsInvalid(congenitalDisease);
     valid = valid && addOrRemoveClassIsInvalid(initialSymptoms);
     if(!valid){
         return;
@@ -81,7 +81,7 @@ function nextPage(){
     "&year=" + encodeURIComponent(yearValue) + 
     "&month=" + encodeURIComponent(monthValue) + 
     "&sterilization=" + encodeURIComponent(sterilizationValue) + 
-    "&vaccineValue=" + encodeURIComponent(vaccineValue) + 
+    "&vaccine=" + encodeURIComponent(vaccineValue) + 
     "&historyDrugAllergy=" + encodeURIComponent(historyDrugAllergyValue) + 
     "&surgery=" + encodeURIComponent(surgeryValue) + 
     "&congenitalDisease=" + encodeURIComponent(congenitalDiseaseValue) + 

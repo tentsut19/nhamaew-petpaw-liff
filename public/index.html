@@ -106,22 +106,38 @@
                             </div>
                             <div class="mb-3">
                                 <label for="sterilization" class="form-label">ทำหมัน</label>
-                                <input type="input" class="form-control" id="sterilization" placeholder="ทำหมัน" onblur="addOrRemoveClassIsInvalid(this)">
+                                <!-- <input type="input" class="form-control" id="sterilization" placeholder="ทำหมัน" onblur="addOrRemoveClassIsInvalid(this)"> -->
+                                <select class="form-control" id="sterilization">
+                                    <option value="">-- การทำหมัน --</option>
+                                    <option value="ทำหมันแล้ว">ทำหมันแล้ว</option>
+                                    <option value="ยังไม่ทำหมัน">ยังไม่ทำหมัน</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="vaccine" class="form-label">มีการฉีดวัคซีนครบตามกำหนด</label>
-                                <input type="input" class="form-control" id="vaccine" placeholder="วัคซีน" onblur="addOrRemoveClassIsInvalid(this)">
+                                <!-- <input type="input" class="form-control" id="vaccine" placeholder="วัคซีน" onblur="addOrRemoveClassIsInvalid(this)"> -->
+                                <select class="form-control" id="vaccine">
+                                    <option value="">-- การฉีดวัคซีน --</option>
+                                    <option value="ฉีดวัคซีนแล้ว">ฉีดวัคซีนแล้ว</option>
+                                    <option value="ฉีดวัคซีนแล้วแต่ยังไม่ครบ">ฉีดวัคซีนแล้วแต่ยังไม่ครบ</option>
+                                    <option value="ยังไม่ฉีดวัคซีน">ยังไม่ฉีดวัคซีน</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="historyDrugAllergy" class="form-label">ประวัติแพ้ยา</label>
-                                <input type="input" class="form-control" id="historyDrugAllergy" placeholder="ประวัติแพ้ยา" onblur="addOrRemoveClassIsInvalid(this)">
+                                <label for="historyDrugAllergy" class="form-label">ประวัติแพ้ยา (ถ้ามี)</label>
+                                <input type="input" class="form-control" id="historyDrugAllergy" placeholder="ประวัติแพ้ยา">
                             </div>
                             <div class="mb-3">
                                 <label for="surgery" class="form-label">มีการผ่าตัดจากความเจ็บป่วยมาก่อนหรือไม่</label>
-                                <input type="input" class="form-control" id="surgery" placeholder="กรุณาเลือกประวัติการผ่าตัด" onblur="addOrRemoveClassIsInvalid(this)">
+                                <!-- <input type="input" class="form-control" id="surgery" placeholder="กรุณาเลือกประวัติการผ่าตัด" onblur="addOrRemoveClassIsInvalid(this)"> -->
+                                <select class="form-control" id="surgery">
+                                    <option value="">-- มีการผ่าตัดจากความเจ็บป่วยมาก่อนหรือไม่ --</option>
+                                    <option value="มี">มี</option>
+                                    <option value="ไม่มี">ไม่มี</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="congenitalDisease" class="form-label">โรคประจำตัว</label>
+                                <label for="congenitalDisease" class="form-label">โรคประจำตัว (ถ้ามี)</label>
                                 <input type="input" class="form-control" id="congenitalDisease" placeholder="โรคประจำตัว" onblur="addOrRemoveClassIsInvalid(this)">
                             </div>
                             <div class="mb-3">

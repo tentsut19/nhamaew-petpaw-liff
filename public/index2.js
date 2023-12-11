@@ -92,8 +92,8 @@ async function submit(){
 
         var profile = await liff.getProfile();
 
-        // var url = "https://cat-bot-api.com/api/v1/cat-bot/create/consult-veterinarian";
-        var url = "https://f14c-184-22-106-189.ngrok-free.app/api/v1/cat-bot/create/consult-veterinarian";
+        var url = "https://cat-bot-api.com/api/v1/cat-bot/create/consult-veterinarian";
+        // var url = "https://f14c-184-22-106-189.ngrok-free.app/api/v1/cat-bot/create/consult-veterinarian";
 
         const response = await fetch(url, {
             method: 'POST',
