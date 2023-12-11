@@ -79,16 +79,39 @@
                             </div>
                             <div class="mb-3">
                                 <label for="breeds" class="form-label">สายพันธุ์ (Breeds)</label>
-                                <input type="input" class="form-control" id="breeds" placeholder="สายพันธุ์ (Breeds)" onblur="addOrRemoveClassIsInvalid(this)">
+                                <!-- <input type="input" class="form-control" id="breeds" placeholder="สายพันธุ์ (Breeds)" onblur="addOrRemoveClassIsInvalid(this)"> -->
+                                <select class="form-control" id="breedsSelect" onchange="changeBreedsSelect()">
+                                    <option value="">-- สายพันธุ์ --</option>
+                                    <option value="แมวเปอร์เซีย">แมวเปอร์เซีย</option>
+                                    <option value="แมวอเมริกัน ชอร์ตแฮร์">แมวอเมริกัน ชอร์ตแฮร์</option>
+                                    <option value="แมวสก็อตติช โฟลด์">แมวสก็อตติช โฟลด์</option>
+                                    <option value="แมวไทย / แมวบ้าน">แมวไทย / แมวบ้าน</option>
+                                    <option value="แมววิเชียรมาศ">แมววิเชียรมาศ</option>
+                                    <option value="แมวโคราช">แมวโคราช</option>
+                                    <option value="แมวขาวมณี">แมวขาวมณี</option>
+                                    <option value="แมวบริติช ชอร์ตแฮร์">แมวบริติช ชอร์ตแฮร์</option>
+                                    <option value="แมวเอ็กโซติก">แมวเอ็กโซติก</option>
+                                    <option value="แมวเมนคูน">แมวเมนคูน</option>
+                                    <option value="แมวเบงกอล">แมวเบงกอล</option>
+                                    <option value="สฟิงซ์">สฟิงซ์</option>
+                                    <option value="คาราคัล">คาราคัล</option>
+                                    <option value="ลิงซ์ยูเรเชีย">ลิงซ์ยูเรเชีย</option>
+                                    <option value="เซอร์วัล">เซอร์วัล</option>
+                                    <option value="อเมริกันบ็อบเทล">อเมริกันบ็อบเทล</option>
+                                    <option value="อเมริกันเคิร์ล">อเมริกันเคิร์ล</option>
+                                    <option value="พันธุ์ผสม">พันธุ์ผสม</option>
+                                    <option value="อื่นๆ">อื่นๆ</option>
+                                </select>
+                                <input type="input" style="display: none;" class="form-control" id="breedsInput" placeholder="ระบุสายพันธุ์" onblur="addOrRemoveClassIsInvalid(this)">
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-auto">
                                     <label class="form-label" for="year">อายุ (โดยประมาณ)</label>
                                     <div class="input-group mb-2">
                                       <div class="input-group-prepend">
                                         <div class="input-group-text">ปี</div>
                                       </div>
-                                      <input type="text" class="form-control" id="year" onblur="addOrRemoveClassIsInvalid(this)">
+                                      <input type="text" class="form-control" id="year">
                                     </div>
                                   </div>
                                   <div class="col-auto">
@@ -97,12 +120,32 @@
                                       <div class="input-group-prepend">
                                         <div class="input-group-text">เดือน</div>
                                       </div>
-                                      <input type="text" class="form-control" id="month" onblur="addOrRemoveClassIsInvalid(this)">
+                                      <input type="text" class="form-control" id="month">
                                     </div>
                                   </div>
                                   <small id="passwordHelpBlock" class="form-text" style="color: red;padding-left: 15px;">
                                     หากอายุไม่ถึงปีให้เว้นว่าง
                                   </small>
+                            </div> -->
+                            <div class="mb-3">
+                                <label for="year" class="form-label">อายุ (โดยประมาณ)</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">ปี</div>
+                                    </div>
+                                    <input type="number" class="form-control" id="year">
+                                </div>
+                                <small id="passwordHelpBlock" class="form-text" style="color: red;padding-left: 15px;">
+                                    หากอายุไม่ถึงปีให้เว้นว่าง
+                                  </small>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                      <div class="input-group-text">เดือน</div>
+                                    </div>
+                                    <input type="number" class="form-control" id="month">
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="sterilization" class="form-label">ทำหมัน</label>
@@ -158,7 +201,7 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="liff-config.js"></script>
-    <script src="index.js"></script>
+    <script src="index.js?cache=202312120314"></script>
 
 </body>
 </html>

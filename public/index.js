@@ -26,9 +26,9 @@ async function initializeLiff() {
 
 function validateValue(){
     var nameCat = document.getElementById("nameCat");
-    var breeds = document.getElementById("breeds");
-    var year = document.getElementById("year");
-    var month = document.getElementById("month");
+    var breedsSelect = document.getElementById("breedsSelect");
+    // var year = document.getElementById("year");
+    // var month = document.getElementById("month");
     var sterilization = document.getElementById("sterilization");
     var vaccine = document.getElementById("vaccine");
     // var historyDrugAllergy = document.getElementById("historyDrugAllergy");
@@ -38,15 +38,20 @@ function validateValue(){
 
     var valid = true;
     valid = valid && addOrRemoveClassIsInvalid(nameCat);
-    valid = valid && addOrRemoveClassIsInvalid(breeds);
-    valid = valid && addOrRemoveClassIsInvalid(year);
-    valid = valid && addOrRemoveClassIsInvalid(month);
+    valid = valid && addOrRemoveClassIsInvalid(breedsSelect);
+    if("อื่นๆ" == breedsSelect.value){
+        var breedsInput = document.getElementById("breedsInput");
+        valid = valid && addOrRemoveClassIsInvalid(breedsInput);
+    }
+    // valid = valid && addOrRemoveClassIsInvalid(year);
+    // valid = valid && addOrRemoveClassIsInvalid(month);
     valid = valid && addOrRemoveClassIsInvalid(sterilization);
     valid = valid && addOrRemoveClassIsInvalid(vaccine);
     // valid = valid && addOrRemoveClassIsInvalid(historyDrugAllergy);
     valid = valid && addOrRemoveClassIsInvalid(surgery);
     // valid = valid && addOrRemoveClassIsInvalid(congenitalDisease);
     valid = valid && addOrRemoveClassIsInvalid(initialSymptoms);
+
     if(!valid){
         return;
     }
@@ -63,9 +68,21 @@ function addOrRemoveClassIsInvalid(ele){
     }
 }
 
+function changeBreedsSelect(){
+    var breedsSelect = document.getElementById("breedsSelect").value;
+    if("อื่นๆ" == breedsSelect){
+        document.getElementById("breedsInput").style.display = 'block';
+    }else{
+        document.getElementById("breedsInput").style.display = 'none';
+    }
+}
+
 function nextPage(){
     var nameCatValue = document.getElementById("nameCat").value;
-    var breedsValue = document.getElementById("breeds").value;
+    var breedsValue = document.getElementById("breedsSelect").value;
+    if("อื่นๆ" == breedsValue){
+        breedsValue = document.getElementById("breedsInput").value;
+    }
     var yearValue = document.getElementById("year").value;
     var monthValue = document.getElementById("month").value;
     var sterilizationValue = document.getElementById("sterilization").value;

@@ -13,6 +13,23 @@ async function initializeLiff() {
     }
 }
 
+function openDialogConvfirm(id){
+    this.currentId = id
+    Swal.fire({
+      title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
+      text: "ยืนยันการส่งข้อมูลเพื่อให้สัตวแพทย์ติดต่อกลับ",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ยืนยัน',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        validateValue()
+      }
+    })
+}
 
 function validateValue(){
     var zipcode = document.getElementById("zipcode");
@@ -91,6 +108,8 @@ async function submit(){
         var emailValue = document.getElementById("email").value;
 
         var profile = await liff.getProfile();
+
+        document.getElementById("buttonSubmit").disabled = true;
 
         var url = "https://cat-bot-api.com/api/v1/cat-bot/create/consult-veterinarian";
         // var url = "https://f14c-184-22-106-189.ngrok-free.app/api/v1/cat-bot/create/consult-veterinarian";

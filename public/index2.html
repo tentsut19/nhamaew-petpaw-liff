@@ -109,9 +109,8 @@
                                 <input type="input" class="form-control" id="email" placeholder="อีเมลเจ้าของ" onblur="addOrRemoveClassIsInvalid(this)">
                             </div>
                             
-
                             <div class="d-grid gap-2">
-                                <button style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="validateValue()">ส่งคำขอนัดปรึกษาสัตวแพทย์</button>
+                                <button id="buttonSubmit" style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="openDialogConvfirm()">ส่งคำขอนัดปรึกษาสัตวแพทย์</button>
                             </div><br>
 
                             <div style="text-align: center;">
@@ -135,7 +134,10 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="liff-config.js"></script>
-    <script src="index2.js"></script>
+    <script src="index2.js?cache=202312120314"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
         
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
