@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เปิดใบงาน</title>
+    <!-- เรียกใช้ Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" src="custom.css">
+    <style>
+        .error-border {
+            border-color: red !important;
+        }
+        #overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 4%;
+        opacity: .80;
+        }
+        .spinner {
+            margin: 0 auto;
+            height: 64px;
+            width: 64px;
+            animation: rotate 0.8s infinite linear;
+            border: 5px solid firebrick;
+            border-right-color: transparent;
+            border-radius: 50%;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display:none;">
+        <div class="spinner"></div>
+        <br/>
+        Loading...
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        เปิดใบงาน
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div id="div_number" class="form-group" style="display: none;">
+                                <label for="room-number">เลขห้อง:</label>
+                                <input type="text" class="form-control" id="room-number" placeholder="กรอกเลขห้อง">
+                                <small class="text-danger" id="roomNumberError" style="display: none;">กรุณากรอกเลขห้อง</small>
+                            </div><br>
+                            <b id="confirm-label" class="text-warning" style="display: none;"></b><br>
+
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check1" name="option1" value="ไม่มีสัญญาณภาพ">
+                            <label class="form-check-label" for="check1">ไม่มีสัญญาณภาพ</label>
+                            </div>
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check2" name="option2" value="ภาพไม่ชัด">
+                            <label class="form-check-label" for="check2">ภาพไม่ชัด</label>
+                            </div>
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check3" name="option3" value="ช่องหายบางช่อง">
+                            <label class="form-check-label" for="check3">ช่องหายบางช่อง</label>
+                            </div>
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check4" name="option4" value="ช่องไม่ตรง">
+                            <label class="form-check-label" for="check4">ช่องไม่ตรง</label>
+                            </div>
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check5" name="option5" value="เสาทีวีมีปัญหา">
+                            <label class="form-check-label" for="check5">เสาทีวีมีปัญหา</label>
+                            </div>
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check6" name="option6" value="จูนทีวีไม่ได้">
+                            <label class="form-check-label" for="check6">จูนทีวีไม่ได้</label>
+                            </div>
+                            <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="check7" name="option7" value="ยกเลิกบริการ/ตัดสัญญาณ">
+                            <label class="form-check-label" for="check7">ยกเลิกบริการ/ตัดสัญญาณ</label>
+                            </div>
+                            <b id="check-label" class="text-warning"></b><br>
+                            <br>
+
+                            <!-- <button type="button" class="btn btn-success" id="confirm-button2" style="display: none;">ยืนยันสร้างใบงาน</button> -->
+                            <button type="button" class="btn btn-success" id="confirm-button" style="display: none;">ยืนยัน</button>
+                            <button type="button" class="btn btn-link" id="back-button" style="display: none;">กลับ</button>
+                            <button type="button" class="btn btn-primary" id="o-button">เปิดใบงานเ</button>
+                            <!-- <button type="button" class="btn btn-info" id="r-button">เปิดใบงานระดับห้อง</button> -->
+                            <input type="hidden" id="userId">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="liff-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

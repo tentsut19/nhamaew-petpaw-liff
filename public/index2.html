@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ปรึกษาสัตวแพทย์</title>
+    <link rel="icon" type="image/png" href="petpaw.png">
+    <!-- เรียกใช้ Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" src="custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
+    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+    <style>
+        a, h1, h2, .h2{
+            font-family: 'Kanit', sans-serif !important;
+            line-height: 1.6em;
+        }
+        a{
+            font-size: 1.4em;
+        }
+        label{
+            font-size: 1.6em;
+            display: block;
+        }
+        .error-border {
+            border-color: red !important;
+        }
+        #overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 4%;
+        opacity: .80;
+        }
+        .spinner {
+            margin: 0 auto;
+            height: 64px;
+            width: 64px;
+            animation: rotate 0.8s infinite linear;
+            border: 5px solid firebrick;
+            border-right-color: transparent;
+            border-radius: 50%;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @font-face {
+            font-family: 'FC Iconic Regular';
+            src: url('FC-Iconic/FC Iconic Regular.ttf') format('truetype');
+            /* You may need additional format declarations depending on your font file */
+        }
+        body {
+            font-family: 'FC Iconic Regular', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display:none;">
+        <div class="spinner"></div>
+        <br/>
+        Loading...
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <b style="font-size: 22px;">ปรึกษาสัตวแพทย์</b>
+                    </div>
+                    <div class="card-body">
+
+                            <div style="text-align: center;">
+                                <b style="font-size: 18px;color: #B37B38;">กรุณากรอกข้อมูลน้องแมวของคุณเพียงเล็กน้อย</b><br>
+                                <b style="font-size: 22px;color: #B37B38;">เพื่อช่วยให้สัตวแพทย์ทราบข้อมูลเบื้องต้น</b>
+                            </div>
+                            <b style="font-size: 22px;">2. ข้อมูลติดต่อกลับและสถานที่ตั้ง</b>
+
+                            <div class="mb-3" style="margin-top: 10px;">
+                                <label for="address" class="form-label">ตำแหน่งที่ตั้งที่ต้องการให้แนะนำ</label>
+                                <input type="input" class="form-control" id="address" placeholder="ค้นหาโดยรหัสไปรษณีย์,จังหวัด,อำเภอ,ตำบล">
+                                <input type="hidden"  id="district">
+                                <input type="hidden"  id="amphoe">
+                                <input type="hidden"  id="province">
+                                <input type="hidden"  id="zipcode">
+                                <div id="demo2-output" class="uk-margin"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ownerName" class="form-label">ชื่อเจ้าของ</label>
+                                <input type="input" class="form-control" id="ownerName" placeholder="ชื่อเจ้าของ" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label">เบอรโทรให้เราติดต่อกลับ</label>
+                                <input type="input" class="form-control" id="phoneNumber" placeholder="เบอรโทรให้เราติดต่อกลับ" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">อีเมลให้เราติดต่อกลับ</label>
+                                <input type="input" class="form-control" id="email" placeholder="อีเมลให้เราติดต่อกลับ" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            
+
+                            <div class="d-grid gap-2">
+                                <button style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="validateValue()">ส่งคำขอนัดปรึกษาสัตวแพทย์</button>
+                            </div><br>
+
+                            <div style="text-align: center;">
+                                <b style="font-size: 18px;color: #B37B38;">เมื่อส่งคำขอนัดปรึกษาสัตวแพทย์เรียบร้อยแล้ว</b><br>
+                                <b style="font-size: 18px;color: #B37B38;">กรุณารอการติดต่อกลับจากเรา</b>
+                            </div><br>
+                            
+                            <div style="text-align: center;">
+                                <b style="font-size: 18px;color: #40C1AC;">powered by</b>
+                                <img src="petpaw.png">
+                                <b style="font-size: 18px;color: #40C1AC;">PetPaw</b>
+                            </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="liff-config.js"></script>
+    <script src="index2.js"></script>
+
+        
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+ 
+    <!-- dependencies for zip mode -->
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/zip.js/zip.js"></script>
+    <!-- / dependencies for zip mode -->
+
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
+    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+    
+    <script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
+    
+    <script type="text/javascript">
+        $.Thailand({
+            database: './jquery.Thailand.js/database/db.zip', 
+            $search: $('#address'),
+
+            onDataFill: function(data){
+                console.log(data)
+                var html = '<b>ที่อยู่:</b> ตำบล' + data.district + ' อำเภอ' + data.amphoe + ' จังหวัด' + data.province + ' ' + data.zipcode;
+                $('#district').val(data.district);
+                $('#amphoe').val(data.amphoe);
+                $('#province').val(data.province);
+                $('#zipcode').val(data.zipcode);
+                $('#demo2-output').html('<div class="uk-alert-warning" uk-alert>' + html + '</div>');
+            }
+
+        });
+    </script>
+
+</body>
+</html>

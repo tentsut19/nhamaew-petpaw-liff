@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ปรึกษาสัตวแพทย์</title>
+    <link rel="icon" type="image/png" href="petpaw.png">
+    <!-- เรียกใช้ Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" src="custom.css">
+    <style>
+        .error-border {
+            border-color: red !important;
+        }
+        #overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 4%;
+        opacity: .80;
+        }
+        .spinner {
+            margin: 0 auto;
+            height: 64px;
+            width: 64px;
+            animation: rotate 0.8s infinite linear;
+            border: 5px solid firebrick;
+            border-right-color: transparent;
+            border-radius: 50%;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @font-face {
+            font-family: 'FC Iconic Regular';
+            src: url('FC-Iconic/FC Iconic Regular.ttf') format('truetype');
+            /* You may need additional format declarations depending on your font file */
+        }
+        body {
+            font-family: 'FC Iconic Regular', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display:none;">
+        <div class="spinner"></div>
+        <br/>
+        Loading...
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <b style="font-size: 22px;">ปรึกษาสัตวแพทย์</b>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div style="text-align: center;">
+                                <b style="font-size: 18px;color: #B37B38;">กรุณากรอกข้อมูลน้องแมวของคุณเพียงเล็กน้อย</b><br>
+                                <b style="font-size: 22px;color: #B37B38;">เพื่อช่วยให้สัตวแพทย์ทราบข้อมูลเบื้องต้น</b>
+                            </div>
+                            <b style="font-size: 22px;">1. ข้อมูลน้องแมว</b>
+                            <div class="mb-3" style="margin-top: 10px;">
+                                <label for="nameCat" class="form-label">ชื่อน้องแมว</label>
+                                <input type="input" class="form-control" id="nameCat" placeholder="ชื่อน้องแมว" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="breeds" class="form-label">สายพันธุ์ (Breeds)</label>
+                                <input type="input" class="form-control" id="breeds" placeholder="สายพันธุ์ (Breeds)" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label class="form-label" for="year">อายุ (โดยประมาณ)</label>
+                                    <div class="input-group mb-2">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text">ปี</div>
+                                      </div>
+                                      <input type="text" class="form-control" id="year" onblur="addOrRemoveClassIsInvalid(this)">
+                                    </div>
+                                  </div>
+                                  <div class="col-auto">
+                                    <label class="form-label" for="month">&nbsp;</label>
+                                    <div class="input-group mb-2">
+                                      <div class="input-group-prepend">
+                                        <div class="input-group-text">เดือน</div>
+                                      </div>
+                                      <input type="text" class="form-control" id="month" onblur="addOrRemoveClassIsInvalid(this)">
+                                    </div>
+                                  </div>
+                                  <small id="passwordHelpBlock" class="form-text" style="color: red;padding-left: 15px;">
+                                    หากอายุไม่ถึงปีให้เว้นว่าง
+                                  </small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sterilization" class="form-label">ทำหมัน</label>
+                                <input type="input" class="form-control" id="sterilization" placeholder="ทำหมัน" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="vaccine" class="form-label">มีการฉีดวัคซีนครบตามกำหนด</label>
+                                <input type="input" class="form-control" id="vaccine" placeholder="วัคซีน" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="historyDrugAllergy" class="form-label">ประวัติแพ้ยา</label>
+                                <input type="input" class="form-control" id="historyDrugAllergy" placeholder="ประวัติแพ้ยา" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="surgery" class="form-label">มีการผ่าตัดจากความเจ็บป่วยมาก่อนหรือไม่</label>
+                                <input type="input" class="form-control" id="surgery" placeholder="กรุณาเลือกประวัติการผ่าตัด" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="congenitalDisease" class="form-label">โรคประจำตัว</label>
+                                <input type="input" class="form-control" id="congenitalDisease" placeholder="โรคประจำตัว" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="initialSymptoms" class="form-label">อาการเบื้องต้น</label>
+                                <textarea class="form-control" id="initialSymptoms" rows="6" placeholder="กรุณากรอกอาการเบื้องต้นที่อยากปรึกษาสัตวแพทย์" onblur="addOrRemoveClassIsInvalid(this)"></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button id="buttonNextPage" style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="validateValue()">ต่อไป ></button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="liff-config.js"></script>
+    <script src="index.js"></script>
+
+</body>
+</html>
