@@ -87,14 +87,28 @@
                             </div>
                             <b style="font-size: 22px;">2. ข้อมูลติดต่อกลับและสถานที่ตั้ง</b>
 
-                            <div class="mb-3" style="margin-top: 10px;">
-                                <label for="address" class="form-label">ตำแหน่งที่ตั้งที่ต้องการให้แนะนำ</label>
-                                <input type="input" class="form-control" id="address" placeholder="ค้นหาโดยรหัสไปรษณีย์,จังหวัด,อำเภอ,ตำบล">
-                                <input type="hidden"  id="district">
-                                <input type="hidden"  id="amphoe">
-                                <input type="hidden"  id="province">
-                                <input type="hidden"  id="zipcode">
-                                <div id="demo2-output" class="uk-margin"></div>
+                            <div class="mb-3">
+                                <label for="province" class="form-label">จังหวัด</label>
+                                <select class="form-control" id="province" onchange="getAmphur(event.target.value)">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="amphoe" class="form-label">อำเภอ / เขต</label>
+                                <select class="form-control" id="amphoe" onchange="getThumbon(event.target.value)">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="district" class="form-label">ตำบล / แขวง</label>
+                                <select class="form-control" id="district" onchange="getZipCode(event.target.value)">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="zipcode" class="form-label">รหัสไปรษณีย์</label>
+                                <input type="input" class="form-control" id="zipcode" placeholder="รหัสไปรษณีย์" onblur="addOrRemoveClassIsInvalid(this)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="addressDetail" class="form-label">รายละเอียดที่อยู่</label>
+                                <input type="input" class="form-control" id="addressDetail" placeholder="รายละเอียดที่อยู่">
                             </div>
                             <div class="mb-3">
                                 <label for="ownerName" class="form-label">ชื่อเจ้าของ</label>
@@ -110,7 +124,7 @@
                             </div>
                             
                             <div class="d-grid gap-2">
-                                <button id="buttonSubmit" style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="openDialogConvfirm()">ส่งคำขอนัดปรึกษาสัตวแพทย์</button>
+                                <button id="buttonSubmit" style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="validateValue()">ส่งคำขอนัดปรึกษาสัตวแพทย์</button>
                             </div><br>
 
                             <div style="text-align: center;">
@@ -136,40 +150,6 @@
     <script src="liff-config.js"></script>
     <script src="index2.js?cache=202312120314"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-        
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
- 
-    <!-- dependencies for zip mode -->
-    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/zip.js/zip.js"></script>
-    <!-- / dependencies for zip mode -->
-
-    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/JQL.min.js"></script>
-    <script type="text/javascript" src="./jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
-    
-    <script type="text/javascript" src="./jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
-    
-    <script type="text/javascript">
-        $.Thailand({
-            database: './jquery.Thailand.js/database/db.zip', 
-            $search: $('#address'),
-
-            onDataFill: function(data){
-                console.log(data)
-                var html = '<b>ที่อยู่:</b> ตำบล' + data.district + ' อำเภอ' + data.amphoe + ' จังหวัด' + data.province + ' ' + data.zipcode;
-                $('#district').val(data.district);
-                $('#amphoe').val(data.amphoe);
-                $('#province').val(data.province);
-                $('#zipcode').val(data.zipcode);
-                $('#demo2-output').html('<div class="uk-alert-warning" uk-alert>' + html + '</div>');
-            }
-
-        });
-    </script>
 
 </body>
 </html>

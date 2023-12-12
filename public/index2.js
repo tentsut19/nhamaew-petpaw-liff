@@ -6,15 +6,16 @@ async function initializeLiff() {
     console.log('--- initializeLiff ---')
     await liff.init({ liffId: LIFF_ID });
 
-    if (!liff.isLoggedIn()) {
-        const destinationUrl = window.location.href;
-        liff.login({redirectUri: destinationUrl});
-        return;
-    }
+    // if (!liff.isLoggedIn()) {
+    //     const destinationUrl = window.location.href;
+    //     liff.login({redirectUri: destinationUrl});
+    //     return;
+    // }
+
+    getProvince();
 }
 
-function openDialogConvfirm(id){
-    this.currentId = id
+function openDialogConfirm(){
     Swal.fire({
       title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
       text: "ยืนยันการส่งข้อมูลเพื่อให้สัตวแพทย์ติดต่อกลับ",
@@ -26,36 +27,157 @@ function openDialogConvfirm(id){
       cancelButtonText: 'ยกเลิก'
     }).then((result) => {
       if (result.isConfirmed) {
-        validateValue()
+        submit()
       }
     })
 }
 
+var countryJson;
+function getProvince() {
+    var provinceElement = document.getElementById("province");
+    var option = document.createElement("option");
+    option.text = "--- จังหวัด ---";
+    option.value = "";
+    provinceElement.add(option);
+
+    var amphoeElement = document.getElementById("amphoe");
+    var option = document.createElement("option");
+    option.text = "--- อำเภอ / เขต ---";
+    option.value = "";
+    amphoeElement.add(option);
+
+    var districtElement = document.getElementById("district");
+    var option = document.createElement("option");
+    option.text = "--- ตำบล / แขวง ---";
+    option.value = "";
+    districtElement.add(option);
+
+    fetch('./data.json')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      this.countryJson = data;
+
+      this.countryJson.forEach(element => {
+        // console.log(element);
+        var option1 = document.createElement("option");
+        option1.text = element[0];
+        option1.value = element[0];
+        provinceElement.add(option1);
+      });
+
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+}
+
+var amphurJson;
+function getAmphur(e) {
+    // console.log(e);
+    // console.log(this.countryJson);
+    var amphoeElement = document.getElementById("amphoe");
+    while (amphoeElement.options.length > 0) {
+        amphoeElement.remove(0);
+    }
+    var option = document.createElement("option");
+    option.text = "--- อำเภอ / เขต ---";
+    option.value = "";
+    amphoeElement.add(option);
+
+    var districtElement = document.getElementById("district");
+    while (districtElement.options.length > 0) {
+        districtElement.remove(0);
+    }
+    var option = document.createElement("option");
+    option.text = "--- ตำบล / แขวง ---";
+    option.value = "";
+    districtElement.add(option);
+
+    document.getElementById("zipcode").value = "";
+
+    this.countryJson.forEach(element => {
+        if(element[0] == e){
+            console.log(element[1]);
+            this.amphurJson = element[1];
+
+            this.amphurJson.forEach(element => {
+                // console.log(element);
+                var option1 = document.createElement("option");
+                option1.text = element[0];
+                option1.value = element[0];
+                amphoeElement.add(option1);
+            });
+        }
+    });
+
+}
+
+var thumbonJson;
+function getThumbon(e) {
+    var districtElement = document.getElementById("district");
+    while (districtElement.options.length > 0) {
+        districtElement.remove(0);
+    }
+    var option = document.createElement("option");
+    option.text = "--- ตำบล / แขวง ---";
+    option.value = "";
+    districtElement.add(option);
+
+    document.getElementById("zipcode").value = "";
+
+    this.amphurJson.forEach(element => {
+        if(element[0] == e){
+            console.log(element[1]);
+            this.thumbonJson = element[1];
+
+            this.thumbonJson.forEach(element => {
+                // console.log(element);
+                var option1 = document.createElement("option");
+                option1.text = element[0];
+                option1.value = element[0];
+                districtElement.add(option1);
+            });
+        }
+    });
+
+}
+
+function getZipCode(e) {
+    this.thumbonJson.forEach(element => {
+        if(element[0] == e){
+            console.log(element[1]);
+            document.getElementById("zipcode").value = element[1];
+        }
+    });
+}
+
 function validateValue(){
+    var district = document.getElementById("district");
+    var amphoe = document.getElementById("amphoe");
+    var province = document.getElementById("province");
     var zipcode = document.getElementById("zipcode");
-    var ownerNameValue = document.getElementById("ownerName");
-    var phoneNumberValue = document.getElementById("phoneNumber");
-    var emailValue = document.getElementById("email");
+    var ownerName = document.getElementById("ownerName");
+    var phoneNumber = document.getElementById("phoneNumber");
+    var email = document.getElementById("email");
 
     var valid = true;
-    valid = valid && validateZipcode(zipcode);
-    valid = valid && addOrRemoveClassIsInvalid(ownerNameValue);
-    valid = valid && addOrRemoveClassIsInvalid(phoneNumberValue);
-    valid = valid && addOrRemoveClassIsInvalid(emailValue);
+    valid = valid && addOrRemoveClassIsInvalid(province);
+    valid = valid && addOrRemoveClassIsInvalid(amphoe);
+    valid = valid && addOrRemoveClassIsInvalid(district);
+    valid = valid && addOrRemoveClassIsInvalid(zipcode);
+    valid = valid && addOrRemoveClassIsInvalid(ownerName);
+    valid = valid && addOrRemoveClassIsInvalid(phoneNumber);
+    valid = valid && addOrRemoveClassIsInvalid(email);
     if(!valid){
         return;
     }
-    submit();
-}
-
-function validateZipcode(ele){
-    if(!ele.value){
-        var html = '<b>กรุณา</b> ค้นหาและเลือกที่อยู่';
-        $('#demo2-output').html('<div class="uk-alert-danger" uk-alert>' + html + '</div>');
-        return false;
-    }else{
-        return true;
-    }
+    openDialogConfirm();
 }
 
 function addOrRemoveClassIsInvalid(ele){
@@ -78,6 +200,7 @@ async function submit(){
         // Get the parameter values from the URL
         var urlParams = new URLSearchParams(window.location.search);
         var nameCat = urlParams.get('nameCat');
+        var genderCat = urlParams.get('genderCat');
         var breeds = urlParams.get('breeds');
         var year = urlParams.get('year');
         var month = urlParams.get('month');
@@ -89,6 +212,7 @@ async function submit(){
         var initialSymptoms = urlParams.get('initialSymptoms');
         
         var nameCatValue = decodeURIComponent(nameCat);
+        var genderCatValue = decodeURIComponent(genderCat);
         var breedsValue = decodeURIComponent(breeds);
         var yearValue = decodeURIComponent(year);
         var monthValue = decodeURIComponent(month);
@@ -99,6 +223,7 @@ async function submit(){
         var congenitalDiseaseValue = decodeURIComponent(congenitalDisease);
         var initialSymptomsValue = decodeURIComponent(initialSymptoms);
 
+        var addressDetail = document.getElementById("addressDetail").value;
         var district = document.getElementById("district").value;
         var amphoe = document.getElementById("amphoe").value;
         var province = document.getElementById("province").value;
@@ -126,6 +251,7 @@ async function submit(){
                 statusMessage: profile.statusMessage,
                 pictureUrl: profile.pictureUrl,
                 nameCat: nameCatValue,
+                genderCat: genderCatValue,
                 breeds: breedsValue,
                 year: yearValue,
                 month: monthValue,
@@ -135,6 +261,7 @@ async function submit(){
                 surgery: surgeryValue,
                 congenitalDisease: congenitalDiseaseValue,
                 initialSymptoms: initialSymptomsValue,
+                addressDetail: addressDetail,
                 district: district,
                 amphoe: amphoe,
                 province: province,
@@ -150,68 +277,6 @@ async function submit(){
         liff.closeWindow();
     } catch (error) {
         alert('เกิดข้อผิดพลาด');
-        console.error('API Error:', error);
-    }
-}
-
-
-async function callAPICreateWorkSheet2() {
-    try {
-        if (!liff.isLoggedIn()) {
-            liff.login();
-            return;
-        }
-        const dataContainer = document.getElementById('data-container');
-        document.getElementById('overlay').style.display = 'block';
-
-        this.profile = await liff.getProfile();
-
-        this.roomNumber = document.getElementById('room-number').value;
-        const response = await fetch('https://cabsat-api.easynet.co.th/api/v1/workSheet/line', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // หากต้องการส่ง Access Token
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                // ข้อมูลที่ต้องการส่งไปยัง API ในรูปแบบ JSON
-                lineUserId: this.profile.userId,
-                displayName: this.profile.displayName,
-                statusMessage: this.profile.statusMessage,
-                pictureUrl: this.profile.pictureUrl,
-                roomNumber: this.roomNumber,
-                userId: document.getElementById('userId').value
-            })
-        });
-        document.getElementById('overlay').style.display = 'none';
-        const data = await response.json();
-        console.log('API Response:', data);
-
-        // เรียกใช้ LIFF ในการตอบกลับไปยัง Line
-        if (liff.isInClient()) {
-            // dataContainer.innerHTML = '<h1>เปิดใบงานเรียบร้อย\nใบงานเลขที่: ' + JSON.stringify(data.workSheetCode) + '</h1>';
-            alert('เปิดใบงานเรียบร้อย\nใบงานเลขที่: ' + JSON.stringify(data.workSheetCode));
-            setTimeout(() => {
-                liff.closeWindow();
-            }, 500);
-
-            liff.sendMessages([
-                {
-                    type: 'text',
-                    text: 'เปิดใบงานเรียบร้อย\nใบงานเลขที่:' + JSON.stringify(data.workSheetCode)
-                }
-            ]).then(() => {
-                console.log('Message sent');
-            }).catch((error) => {
-                console.error('Error sending message:', error);
-            });
-        } else {
-            alert('เปิดใบงานเรียบร้อย\nใบงานเลขที่: ' + JSON.stringify(data.workSheetCode));
-        }
-    } catch (error) {
-        document.getElementById('overlay').style.display = 'none';
-        // alert('เกิดข้อผิดพลาด');
-        alert(error);
         console.error('API Error:', error);
     }
 }

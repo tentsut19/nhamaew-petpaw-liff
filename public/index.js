@@ -16,16 +16,17 @@ async function initializeLiff() {
       console.log(userId);
     }
 
-    if (!liff.isLoggedIn()) {
-        const destinationUrl = window.location.href;
-        liff.login({redirectUri: destinationUrl});
-        return;
-    }
+    // if (!liff.isLoggedIn()) {
+    //     const destinationUrl = window.location.href;
+    //     liff.login({redirectUri: destinationUrl});
+    //     return;
+    // }
 
 }
 
 function validateValue(){
     var nameCat = document.getElementById("nameCat");
+    var genderCat = document.getElementById("genderCat");
     var breedsSelect = document.getElementById("breedsSelect");
     // var year = document.getElementById("year");
     // var month = document.getElementById("month");
@@ -39,6 +40,7 @@ function validateValue(){
     var valid = true;
     valid = valid && addOrRemoveClassIsInvalid(nameCat);
     valid = valid && addOrRemoveClassIsInvalid(breedsSelect);
+    valid = valid && addOrRemoveClassIsInvalid(genderCat);
     if("อื่นๆ" == breedsSelect.value){
         var breedsInput = document.getElementById("breedsInput");
         valid = valid && addOrRemoveClassIsInvalid(breedsInput);
@@ -79,6 +81,7 @@ function changeBreedsSelect(){
 
 function nextPage(){
     var nameCatValue = document.getElementById("nameCat").value;
+    var genderCatValue = document.getElementById("genderCat").value;
     var breedsValue = document.getElementById("breedsSelect").value;
     if("อื่นๆ" == breedsValue){
         breedsValue = document.getElementById("breedsInput").value;
@@ -94,6 +97,7 @@ function nextPage(){
 
     // Encode the values and construct the URL
     var url = "index2.html?nameCat=" + encodeURIComponent(nameCatValue) + 
+    "&genderCat=" + encodeURIComponent(genderCatValue) + 
     "&breeds=" + encodeURIComponent(breedsValue) + 
     "&year=" + encodeURIComponent(yearValue) + 
     "&month=" + encodeURIComponent(monthValue) + 
