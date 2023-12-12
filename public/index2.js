@@ -6,11 +6,11 @@ async function initializeLiff() {
     console.log('--- initializeLiff ---')
     await liff.init({ liffId: LIFF_ID });
 
-    // if (!liff.isLoggedIn()) {
-    //     const destinationUrl = window.location.href;
-    //     liff.login({redirectUri: destinationUrl});
-    //     return;
-    // }
+    if (!liff.isLoggedIn()) {
+        const destinationUrl = window.location.href;
+        liff.login({redirectUri: destinationUrl});
+        return;
+    }
 
     getProvince();
 }
