@@ -55,6 +55,15 @@ function validateValue(){
     valid = valid && addOrRemoveClassIsInvalid(initialSymptoms);
 
     if(!valid){
+        Swal.fire({
+            title: 'กรุณากรอกข้อมูลให้ครบ',
+            text: "กรุณากรอกข้อมูลให้ครบเพื่อไปต่อได้",
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
+          }).then((result) => {
+            
+          })
         return;
     }
     nextPage();
@@ -63,6 +72,7 @@ function validateValue(){
 function addOrRemoveClassIsInvalid(ele){
     if(!ele.value){
         ele.classList.add("is-invalid");
+        // ele.scrollIntoView({ behavior: 'auto' });
         return false;
     }else{
         ele.classList.remove("is-invalid");

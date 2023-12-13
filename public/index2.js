@@ -175,6 +175,15 @@ function validateValue(){
     valid = valid && addOrRemoveClassIsInvalid(phoneNumber);
     valid = valid && addOrRemoveClassIsInvalid(email);
     if(!valid){
+        Swal.fire({
+            title: 'กรุณากรอกข้อมูลให้ครบ',
+            text: "กรุณากรอกข้อมูลให้ครบเพื่อส่งคำขอนัดปรึกษาสัตวแพทย์",
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'ตกลง'
+          }).then((result) => {
+            
+          })
         return;
     }
     openDialogConfirm();
