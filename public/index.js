@@ -34,47 +34,117 @@ function validateValue(){
     var vaccine = document.getElementById("vaccine");
     // var historyDrugAllergy = document.getElementById("historyDrugAllergy");
     var surgery = document.getElementById("surgery");
-    // var congenitalDisease = document.getElementById("congenitalDisease");
+    var congenitalDisease = document.getElementById("congenitalDisease");
     var initialSymptoms = document.getElementById("initialSymptoms");
 
     var valid = true;
-    valid = valid && addOrRemoveClassIsInvalid(nameCat);
+    valid = valid && nameCatText(nameCat,100);
     valid = valid && addOrRemoveClassIsInvalid(breedsSelect);
-    valid = valid && addOrRemoveClassIsInvalid(genderCat);
     if("อื่นๆ" == breedsSelect.value){
         var breedsInput = document.getElementById("breedsInput");
-        valid = valid && addOrRemoveClassIsInvalid(breedsInput);
+        valid = valid && breedsInputText(breedsInput,100);
     }
+    valid = valid && addOrRemoveClassIsInvalid(genderCat);
     // valid = valid && addOrRemoveClassIsInvalid(year);
     // valid = valid && addOrRemoveClassIsInvalid(month);
     valid = valid && addOrRemoveClassIsInvalid(sterilization);
     valid = valid && addOrRemoveClassIsInvalid(vaccine);
     // valid = valid && addOrRemoveClassIsInvalid(historyDrugAllergy);
     valid = valid && addOrRemoveClassIsInvalid(surgery);
-    // valid = valid && addOrRemoveClassIsInvalid(congenitalDisease);
+    valid = valid && congenitalDiseaseText(congenitalDisease,100);
     valid = valid && addOrRemoveClassIsInvalid(initialSymptoms);
 
     if(!valid){
-        Swal.fire({
-            title: 'กรุณากรอกข้อมูลให้ครบ',
-            text: "กรุณากรอกข้อมูลให้ครบเพื่อไปต่อได้",
-            icon: 'warning',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'ตกลง'
-          }).then((result) => {
+        // Swal.fire({
+        //     title: 'กรุณากรอกข้อมูลให้ครบ',
+        //     text: "กรุณากรอกข้อมูลให้ครบเพื่อไปต่อได้",
+        //     icon: 'warning',
+        //     confirmButtonColor: '#3085d6',
+        //     confirmButtonText: 'ตกลง'
+        //   }).then((result) => {
             
-          })
+        //   })
         return;
     }
     nextPage();
 }
 
-function addOrRemoveClassIsInvalid(ele){
-    if(!ele.value){
+function addOrRemoveClassIsInvalid(ele,limit){
+    if(!ele.value || ele.value.length > limit){
         ele.classList.add("is-invalid");
-        // ele.scrollIntoView({ behavior: 'auto' });
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
         return false;
     }else{
+        ele.classList.remove("is-invalid");
+        return true;
+    }
+}
+
+function nameCatText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('nameCatText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('nameCatTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('nameCatTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('nameCatTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('nameCatText').innerHTML = '0/100';
+        ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
+    }
+}
+
+function breedsInputText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('breedsInputText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('breedsInputTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('breedsInputTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('breedsInputTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('breedsInputText').innerHTML = '0/100';
+        ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
+    }
+}
+
+function congenitalDiseaseText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('congenitalDiseaseText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('congenitalDiseaseTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('breedsInputTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('congenitalDiseaseText').innerHTML = '0/100';
         ele.classList.remove("is-invalid");
         return true;
     }
@@ -83,9 +153,9 @@ function addOrRemoveClassIsInvalid(ele){
 function changeBreedsSelect(){
     var breedsSelect = document.getElementById("breedsSelect").value;
     if("อื่นๆ" == breedsSelect){
-        document.getElementById("breedsInput").style.display = 'block';
+        document.getElementById("divBreedsInput").style.display = '';
     }else{
-        document.getElementById("breedsInput").style.display = 'none';
+        document.getElementById("divBreedsInput").style.display = 'none';
     }
 }
 

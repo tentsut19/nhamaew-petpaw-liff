@@ -6,7 +6,7 @@
     <title>ปรึกษาสัตวแพทย์ฟรี</title>
     <link rel="icon" type="image/png" href="petpaw.png">
     <!-- เรียกใช้ Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" src="custom.css">
     <style>
         .error-border {
@@ -77,13 +77,21 @@
                                 <b style="font-size: 22px;color: #B37B38;">เพื่อช่วยให้สัตวแพทย์ทราบข้อมูลเบื้องต้น</b>
                             </div>
                             <b style="font-size: 22px;">1. ข้อมูลน้องแมว</b>
+                            
                             <div class="mb-3" style="margin-top: 10px;">
                                 <label for="nameCat" class="form-label">ชื่อน้องแมว</label>
-                                <input type="input" class="form-control" id="nameCat" placeholder="ชื่อน้องแมว" onblur="addOrRemoveClassIsInvalid(this)">
+                                <div class="input-group mb-2">
+                                    <input type="input" class="form-control" id="nameCat" placeholder="ชื่อน้องแมว" onkeyup="nameCatText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="nameCatText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="nameCatTextInvalid" class="invalid-feedback">
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="mb-3">
                                 <label for="breeds" class="form-label">สายพันธุ์ (Breeds)</label>
-                                <!-- <input type="input" class="form-control" id="breeds" placeholder="สายพันธุ์ (Breeds)" onblur="addOrRemoveClassIsInvalid(this)"> -->
                                 <select class="form-control" id="breedsSelect" onchange="changeBreedsSelect()">
                                     <option value="">-- สายพันธุ์ --</option>
                                     <option value="แมวเปอร์เซีย">แมวเปอร์เซีย</option>
@@ -106,7 +114,15 @@
                                     <option value="พันธุ์ผสม">พันธุ์ผสม</option>
                                     <option value="อื่นๆ">อื่นๆ</option>
                                 </select>
-                                <input type="input" style="display: none;" class="form-control" id="breedsInput" placeholder="ระบุสายพันธุ์" onblur="addOrRemoveClassIsInvalid(this)">
+                                <div id="divBreedsInput" class="input-group mb-2" style="display: none;" >
+                                    <input type="input" class="form-control" id="breedsInput" placeholder="ชื่อน้องแมว" onkeyup="breedsInputText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="breedsInputText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="breedsInputTextInvalid" class="invalid-feedback">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                </div>
                             </div>
                             <!-- <div class="row">
                                 <div class="col-auto">
@@ -139,7 +155,7 @@
                                     </div>
                                     <input type="number" class="form-control" id="year">
                                 </div>
-                                <small id="passwordHelpBlock" class="form-text" style="color: red;padding-left: 15px;">
+                                <small id="passwordHelpBlock" class="form-text" style="color: #dc3545;padding-left: 15px;">
                                     หากอายุไม่ถึงปีให้เว้นว่าง
                                   </small>
                             </div>
@@ -153,7 +169,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="genderCat" class="form-label">เพศแมว</label>
-                                <select class="form-control" id="genderCat">
+                                <select class="form-control" id="genderCat" >
                                     <option value="">-- เพศแมว --</option>
                                     <option value="เพศผู้">เพศผู้</option>
                                     <option value="เพศเมีย">เพศเมีย</option>
@@ -162,8 +178,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="sterilization" class="form-label">ทำหมัน</label>
-                                <!-- <input type="input" class="form-control" id="sterilization" placeholder="ทำหมัน" onblur="addOrRemoveClassIsInvalid(this)"> -->
-                                <select class="form-control" id="sterilization">
+                                <select class="form-control" id="sterilization" >
                                     <option value="">-- การทำหมัน --</option>
                                     <option value="ทำหมันแล้ว">ทำหมันแล้ว</option>
                                     <option value="ยังไม่ทำหมัน">ยังไม่ทำหมัน</option>
@@ -171,8 +186,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="vaccine" class="form-label">มีการฉีดวัคซีนครบตามกำหนด</label>
-                                <!-- <input type="input" class="form-control" id="vaccine" placeholder="วัคซีน" onblur="addOrRemoveClassIsInvalid(this)"> -->
-                                <select class="form-control" id="vaccine">
+                                <select class="form-control" id="vaccine" >
                                     <option value="">-- การฉีดวัคซีน --</option>
                                     <option value="ฉีดวัคซีนแล้ว">ฉีดวัคซีนแล้ว</option>
                                     <option value="ฉีดวัคซีนแล้วแต่ยังไม่ครบ">ฉีดวัคซีนแล้วแต่ยังไม่ครบ</option>
@@ -181,24 +195,43 @@
                             </div>
                             <div class="mb-3">
                                 <label for="historyDrugAllergy" class="form-label">ประวัติแพ้ยา (ถ้ามี)</label>
-                                <input type="input" class="form-control" id="historyDrugAllergy" placeholder="ประวัติแพ้ยา">
+                                <textarea class="form-control" id="historyDrugAllergy" rows="3" placeholder="ประวัติแพ้ยา"></textarea>
+                                <div class="valid-feedback">
+                                    0
+                                </div>
+                                <div class="invalid-feedback">
+                                    0
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="surgery" class="form-label">มีการผ่าตัดจากความเจ็บป่วยมาก่อนหรือไม่</label>
-                                <!-- <input type="input" class="form-control" id="surgery" placeholder="กรุณาเลือกประวัติการผ่าตัด" onblur="addOrRemoveClassIsInvalid(this)"> -->
-                                <select class="form-control" id="surgery">
+                                <select class="form-control" id="surgery" >
                                     <option value="">-- มีการผ่าตัดจากความเจ็บป่วยมาก่อนหรือไม่ --</option>
                                     <option value="มี">มี</option>
                                     <option value="ไม่มี">ไม่มี</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="margin-top: 10px;">
                                 <label for="congenitalDisease" class="form-label">โรคประจำตัว (ถ้ามี)</label>
-                                <input type="input" class="form-control" id="congenitalDisease" placeholder="โรคประจำตัว">
+                                <div class="input-group mb-2">
+                                    <input type="input" class="form-control" id="congenitalDisease" placeholder="โรคประจำตัว" onkeyup="congenitalDiseaseText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="congenitalDiseaseText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="congenitalDiseaseTextInvalid" class="invalid-feedback">
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="initialSymptoms" class="form-label">อาการเบื้องต้น</label>
-                                <textarea class="form-control" id="initialSymptoms" rows="6" placeholder="กรุณากรอกอาการเบื้องต้นที่อยากปรึกษาสัตวแพทย์" onblur="addOrRemoveClassIsInvalid(this)"></textarea>
+                                <textarea class="form-control" id="initialSymptoms" rows="6" placeholder="กรุณากรอกอาการเบื้องต้นที่อยากปรึกษาสัตวแพทย์"></textarea>
+                                <div class="valid-feedback">
+                                    0
+                                </div>
+                                <div class="invalid-feedback">
+                                    กรุณากรอกข้อมูล
+                                </div>
                             </div>
 
                             <div class="d-grid gap-2">
@@ -214,7 +247,7 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="liff-config.js"></script>
-    <script src="index.js?cache=202312132107"></script>
+    <script src="index.js?cache=202312152102"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>

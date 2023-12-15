@@ -18,7 +18,7 @@ async function initializeLiff() {
 function openDialogConfirm(){
     Swal.fire({
       title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
-      text: "ยืนยันการส่งข้อมูลเพื่อให้สัตวแพทย์ติดต่อกลับ",
+      text: "เมื่อกดยืนยัน คุณจะได้รับเลขนัดปรึกษาสัตวแพทย์ทางไลน์ หากไม่ได้รับกรุณาติดต่อแอดมิน",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -162,6 +162,7 @@ function validateValue(){
     var amphoe = document.getElementById("amphoe");
     var province = document.getElementById("province");
     var zipcode = document.getElementById("zipcode");
+    var addressDetail = document.getElementById("addressDetail");
     var ownerName = document.getElementById("ownerName");
     var phoneNumber = document.getElementById("phoneNumber");
     var email = document.getElementById("email");
@@ -171,31 +172,128 @@ function validateValue(){
     valid = valid && addOrRemoveClassIsInvalid(amphoe);
     valid = valid && addOrRemoveClassIsInvalid(district);
     valid = valid && addOrRemoveClassIsInvalid(zipcode);
-    valid = valid && addOrRemoveClassIsInvalid(ownerName);
-    valid = valid && addOrRemoveClassIsInvalid(phoneNumber);
-    valid = valid && addOrRemoveClassIsInvalid(email);
+    valid = valid && addressDetailText(addressDetail,100);
+    valid = valid && ownerNameText(ownerName,100);
+    valid = valid && phoneNumberText(phoneNumber,100);
+    valid = valid && emailText(email,100);
     if(!valid){
-        Swal.fire({
-            title: 'กรุณากรอกข้อมูลให้ครบ',
-            text: "กรุณากรอกข้อมูลให้ครบเพื่อส่งคำขอนัดปรึกษาสัตวแพทย์",
-            icon: 'warning',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'ตกลง'
-          }).then((result) => {
+        // Swal.fire({
+        //     title: 'กรุณากรอกข้อมูลให้ครบ',
+        //     text: "กรุณากรอกข้อมูลให้ครบเพื่อส่งคำขอนัดปรึกษาสัตวแพทย์",
+        //     icon: 'warning',
+        //     confirmButtonColor: '#3085d6',
+        //     confirmButtonText: 'ตกลง'
+        //   }).then((result) => {
             
-          })
+        //   })
         return;
     }
     openDialogConfirm();
 }
 
-function addOrRemoveClassIsInvalid(ele){
-    if(!ele.value){
+function addOrRemoveClassIsInvalid(ele,limit){
+    if(!ele.value || ele.value.length > limit){
         ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
         return false;
     }else{
         ele.classList.remove("is-invalid");
         return true;
+    }
+}
+
+function addressDetailText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('addressDetailText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('addressDetailTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('addressDetailTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('addressDetailText').innerHTML = '0/100';
+        ele.classList.remove("is-invalid");
+        return true;
+    }
+}
+
+function ownerNameText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('ownerNameText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('ownerNameTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('ownerNameTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('ownerNameTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('ownerNameText').innerHTML = '0/100';
+        ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
+    }
+}
+
+function phoneNumberText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('phoneNumberText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('phoneNumberTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('phoneNumberTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('phoneNumberTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('phoneNumberText').innerHTML = '0/100';
+        ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
+    }
+}
+
+function emailText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('emailText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('emailTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('emailTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+        
+    }else{
+        document.getElementById('emailTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('emailText').innerHTML = '0/100';
+        ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
     }
 }
 

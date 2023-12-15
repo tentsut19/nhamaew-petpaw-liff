@@ -106,21 +106,53 @@
                                 <label for="zipcode" class="form-label">รหัสไปรษณีย์</label>
                                 <input type="input" class="form-control" id="zipcode" placeholder="รหัสไปรษณีย์" onblur="addOrRemoveClassIsInvalid(this)">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="margin-top: 10px;">
                                 <label for="addressDetail" class="form-label">รายละเอียดที่อยู่</label>
-                                <input type="input" class="form-control" id="addressDetail" placeholder="บ้านเลขที่, ซอย">
+                                <div class="input-group mb-2">
+                                    <input type="input" class="form-control" id="addressDetail" placeholder="บ้านเลขที่, ซอย" onkeyup="addressDetailText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="addressDetailText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="addressDetailTextInvalid" class="invalid-feedback">
+                                        
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="margin-top: 10px;">
                                 <label for="ownerName" class="form-label">ชื่อเจ้าของ</label>
-                                <input type="input" class="form-control" id="ownerName" placeholder="ชื่อเจ้าของ" onblur="addOrRemoveClassIsInvalid(this)">
+                                <div class="input-group mb-2">
+                                    <input type="input" class="form-control" id="ownerName" placeholder="ชื่อเจ้าของ" onkeyup="ownerNameText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="ownerNameText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="ownerNameTextInvalid" class="invalid-feedback">
+                                        
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="margin-top: 10px;">
                                 <label for="phoneNumber" class="form-label">เบอรโทรเจ้าของ</label>
-                                <input type="input" class="form-control" id="phoneNumber" placeholder="เบอรโทรเจ้าของ" onblur="addOrRemoveClassIsInvalid(this)">
+                                <div class="input-group mb-2">
+                                    <input type="input" class="form-control" id="phoneNumber" placeholder="เบอรโทรเจ้าของ" onkeyup="phoneNumberText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="phoneNumberText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="phoneNumberTextInvalid" class="invalid-feedback">
+                                        
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="margin-top: 10px;">
                                 <label for="email" class="form-label">อีเมลเจ้าของ</label>
-                                <input type="input" class="form-control" id="email" placeholder="อีเมลเจ้าของ" onblur="addOrRemoveClassIsInvalid(this)">
+                                <div class="input-group mb-2">
+                                    <input type="input" class="form-control" id="email" placeholder="อีเมลเจ้าของ" onkeyup="emailText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="emailText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="emailTextInvalid" class="invalid-feedback">
+                                        
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="d-grid gap-2">
@@ -138,8 +170,6 @@
                                 <b style="font-size: 18px;color: #40C1AC;">PetPaw</b>
                             </div>
 
-
-
                     </div>
                 </div>
             </div>
@@ -148,7 +178,7 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="liff-config.js"></script>
-    <script src="index2.js?cache=202312132107"></script>
+    <script src="index2.js?cache=202312152102"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
