@@ -15,6 +15,17 @@ async function initializeLiff() {
     getProvince();
 }
 
+function openConsent(){
+    Swal.fire({
+        // title: "ข้อตกลง Consent การให้ข้อมูลส่วนบุคคล",
+        html: "<b style='font-size: 24px;'>ข้อตกลง Consent การให้ข้อมูลส่วนบุคคล</b><br><br><div style='text-align: left;'><label style='font-size: 14px;'>เมื่อคุณยินยอมข้อตกลงนี้ (ต่อไปจะเรียกว่า \"ผู้ให้ข้อมูล\") ในวันที่ยินยอมให้ข้อมูลเป็นต้นไป</label><br><b style='font-size: 14px;'>1. ข้อมูลที่จะให้</b><br><label style='font-size: 14px;margin-bottom: 0;'>ผู้ให้ข้อมูลยินยอมให้โรงพยาบาลในเครือ เข้าถึงและใช้ข้อมูลส่วนบุคคลต่อไปนี้:</label><label style='font-size: 14px;margin-bottom: 0;'>- ข้อมูลเบื้องต้นของเจ้าของและสัตว์เลี้ยง</label><label style='font-size: 14px;margin-bottom: 0;'>- ข้อมูลสุขภาพทั่วไปของสัตว์เลี้ยงประวัติการรักษาทางการแพทย์</label><label style='font-size: 14px;margin-bottom: 0;'>- ข้อมูลเกี่ยวกับการนัดหมายและการรักษา</label><label style='font-size: 14px;margin-bottom: 0;'>- ข้อมูลประวัติการจ่ายเงินและการเรียกเก็บเงิน</label><br><b style='font-size: 14px;'>‍2. วัตถุประสงค์ในการให้ข้อมูล</b><br><label style='font-size: 14px;margin-bottom: 0;'>ข้อมูลที่ได้รับจะถูกนำมาใช้เพื่อวัตถุประสงค์ต่อไปนี้:</label><label style='font-size: 14px;margin-bottom: 0;'>- การให้บริการทางการแพทย์</label><label style='font-size: 14px;margin-bottom: 0;'>- การจัดการนัดหมายและการรักษาการบันทึกประวัติการรักษา</label><label style='font-size: 14px;margin-bottom: 0;'>- การชำระเงิน</label><label style='font-size: 14px;margin-bottom: 0;'>- การปรับปรุงคุณภาพการบริการ</label><br><b style='font-size: 14px;'>‍3. การรักษาความปลอดภัยของข้อมูล</b><br><label style='font-size: 14px;margin-bottom: 0;'>‍โรงพยาบาลในเครือจะดูแลรักษาความปลอดภัยของข้อมูลส่วนบุคคลของผู้ให้ข้อมูลตามนโยบายความปลอดภัยที่เป็นไปตามกฎหมายที่เกี่ยวข้อง.</label><br><b style='font-size: 14px;'>‍‍4. การยกเลิก Consent</b><br><label style='font-size: 14px;margin-bottom: 0;'>‍‍ผู้ให้ข้อมูลสามารถยกเลิกการให้ข้อมูลได้โดยการแจ้งให้ทราบลายลักษณ์อักษรถึง support@petpaw.com การยกเลิกนี้จะมีผลเมื่อทางเราได้รับข้อมูลแล้วเท่านั้น</label><br><label style='font-size: 14px;margin-bottom: 0;'>‍‍วันที่: 19 ธันวาคม 2566</label></div>",
+        // text: "เมื่อคุณยินยอมข้อตกลงนี้ (ต่อไปจะเรียกว่า \"ผู้ให้ข้อมูล\") ในวันที่ยินยอมให้ข้อมูลเป็นต้นไป\n\n1. ข้อมูลที่จะให้\nผู้ให้ข้อมูลยินยอมให้โรงพยาบาลในเครือ เข้าถึงและใช้ข้อมูลส่วนบุคคลต่อไปนี้:",
+        showCancelButton: true,
+        showConfirmButton: false,
+        cancelButtonText: 'ปิด'
+    });
+}
+
 function openDialogConfirm(){
     Swal.fire({
       title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
@@ -166,6 +177,7 @@ function validateValue(){
     var ownerName = document.getElementById("ownerName");
     var phoneNumber = document.getElementById("phoneNumber");
     var email = document.getElementById("email");
+    var consent = document.getElementById("consent");
 
     var valid = true;
     valid = valid && addOrRemoveClassIsInvalid(province);
@@ -176,6 +188,7 @@ function validateValue(){
     valid = valid && ownerNameText(ownerName,100);
     valid = valid && phoneNumberText(phoneNumber,100);
     valid = valid && emailText(email,100);
+    valid = valid && validateConsent(consent);
     if(!valid){
         // Swal.fire({
         //     title: 'กรุณากรอกข้อมูลให้ครบ',
@@ -189,6 +202,21 @@ function validateValue(){
         return;
     }
     openDialogConfirm();
+}
+
+function clickConsent(){
+    var consent = document.getElementById("consent");
+    validateConsent(consent);
+}
+
+function validateConsent(ele){
+    if(ele.checked){
+        document.getElementById("consentInvalid").style.display = 'none';
+        return true;
+    }else{
+        document.getElementById("consentInvalid").style.display = '';
+        return false;
+    }
 }
 
 function addOrRemoveClassIsInvalid(ele,limit){
@@ -307,6 +335,7 @@ async function submit(){
         // Get the parameter values from the URL
         var urlParams = new URLSearchParams(window.location.search);
         var nameCat = urlParams.get('nameCat');
+        var weightRange = urlParams.get('weightRange');
         var genderCat = urlParams.get('genderCat');
         var breeds = urlParams.get('breeds');
         var year = urlParams.get('year');
@@ -319,6 +348,7 @@ async function submit(){
         var initialSymptoms = urlParams.get('initialSymptoms');
         
         var nameCatValue = decodeURIComponent(nameCat);
+        var weightRangeValue = decodeURIComponent(weightRange);
         var genderCatValue = decodeURIComponent(genderCat);
         var breedsValue = decodeURIComponent(breeds);
         var yearValue = decodeURIComponent(year);
@@ -358,6 +388,7 @@ async function submit(){
                 statusMessage: profile.statusMessage,
                 pictureUrl: profile.pictureUrl,
                 nameCat: nameCatValue,
+                weightRange: weightRangeValue,
                 genderCat: genderCatValue,
                 breeds: breedsValue,
                 year: yearValue,

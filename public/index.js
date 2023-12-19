@@ -26,6 +26,7 @@ async function initializeLiff() {
 
 function validateValue(){
     var nameCat = document.getElementById("nameCat");
+    var weightRange = document.getElementById("weightRange");
     var genderCat = document.getElementById("genderCat");
     var breedsSelect = document.getElementById("breedsSelect");
     // var year = document.getElementById("year");
@@ -44,6 +45,7 @@ function validateValue(){
         var breedsInput = document.getElementById("breedsInput");
         valid = valid && breedsInputText(breedsInput,100);
     }
+    valid = valid && addOrRemoveClassIsInvalid(weightRange);
     valid = valid && addOrRemoveClassIsInvalid(genderCat);
     // valid = valid && addOrRemoveClassIsInvalid(year);
     // valid = valid && addOrRemoveClassIsInvalid(month);
@@ -161,6 +163,7 @@ function changeBreedsSelect(){
 
 function nextPage(){
     var nameCatValue = document.getElementById("nameCat").value;
+    var weightRangeValue = document.getElementById("weightRange").value;
     var genderCatValue = document.getElementById("genderCat").value;
     var breedsValue = document.getElementById("breedsSelect").value;
     if("อื่นๆ" == breedsValue){
@@ -177,6 +180,7 @@ function nextPage(){
 
     // Encode the values and construct the URL
     var url = "index2.html?nameCat=" + encodeURIComponent(nameCatValue) + 
+    "&weightRange=" + encodeURIComponent(weightRangeValue) + 
     "&genderCat=" + encodeURIComponent(genderCatValue) + 
     "&breeds=" + encodeURIComponent(breedsValue) + 
     "&year=" + encodeURIComponent(yearValue) + 

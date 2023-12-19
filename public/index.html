@@ -124,29 +124,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col-auto">
-                                    <label class="form-label" for="year">อายุ (โดยประมาณ)</label>
-                                    <div class="input-group mb-2">
-                                      <div class="input-group-prepend">
-                                        <div class="input-group-text">ปี</div>
-                                      </div>
-                                      <input type="text" class="form-control" id="year">
-                                    </div>
-                                  </div>
-                                  <div class="col-auto">
-                                    <label class="form-label" for="month">&nbsp;</label>
-                                    <div class="input-group mb-2">
-                                      <div class="input-group-prepend">
-                                        <div class="input-group-text">เดือน</div>
-                                      </div>
-                                      <input type="text" class="form-control" id="month">
-                                    </div>
-                                  </div>
-                                  <small id="passwordHelpBlock" class="form-text" style="color: red;padding-left: 15px;">
-                                    หากอายุไม่ถึงปีให้เว้นว่าง
-                                  </small>
-                            </div> -->
                             <div class="mb-3">
                                 <label for="year" class="form-label">อายุ (โดยประมาณ)</label>
                                 <div class="input-group mb-2">
@@ -166,6 +143,17 @@
                                     </div>
                                     <input type="number" class="form-control" id="month">
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="weightRange" class="form-label">น้ำหนักโดยประมาณ</label>
+                                <select class="form-control" id="weightRange" >
+                                    <option value="">-- น้ำหนักโดยประมาณ --</option>
+                                    <option value="1.2-">น้อยกว่า 1.2 kg</option>
+                                    <option value="1.2-2.8">1.2-2.8 kg</option>
+                                    <option value="2.8-6.5">2.8-6.5 kg</option>
+                                    <option value="6.5-12.5">6.5-12.5 kg</option>
+                                    <option value="12.5+">มากกว่า 12.5 kg</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="genderCat" class="form-label">เพศแมว</label>
@@ -247,7 +235,7 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="liff-config.js"></script>
-    <script src="index.js?cache=202312152102"></script>
+    <script src="index.js?cache=202312192113"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>

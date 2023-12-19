@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" src="custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
-    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
     <style>
         a, h1, h2, .h2{
             font-family: 'Kanit', sans-serif !important;
@@ -64,6 +63,75 @@
         body {
             font-family: 'FC Iconic Regular', sans-serif;
         }
+
+        /* The customcheck */
+        .customcheck {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Hide the browser's default checkbox */
+        .customcheck input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .customcheck:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .customcheck input:checked ~ .checkmark {
+            background-color: #B37B38;
+            border-radius: 5px;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .customcheck input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .customcheck .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
     </style>
 </head>
 <body>
@@ -154,6 +222,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="mb-3" style="margin-top: 10px;">
+                                <label class="customcheck">ฉันยินยอมให้ส่งข้อมูลไปโรงพยาบาลในเครือเพื่อให้ติดต่อกลับ <a style="font-family: 'FC Iconic Regular', sans-serif !important;font-size: 16px;" href="javascript:void(0)" onclick="openConsent()">ข้อมูลเพิ่มเติม</a>
+                                    <input type="checkbox" id="consent" onclick="clickConsent()">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <div id="consentInvalid" style="display: none;color: #dc3545;font-size: 80%">
+                                    กรุณากดยินยอม เพื่อรับการช่วยเหลือที่ดีที่สุดจากสัตวแพทย์
+                                </div>
+                            </div>
+
+                            
                             
                             <div class="d-grid gap-2">
                                 <button id="buttonSubmit" style="background-color: #D3AD80;color: white;width: 100%;" class="btn" type="button" onclick="validateValue()">ส่งคำขอนัดปรึกษาสัตวแพทย์</button>
@@ -178,7 +258,7 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script src="liff-config.js"></script>
-    <script src="index2.js?cache=202312152102"></script>
+    <script src="index2.js?cache=202312192113"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
