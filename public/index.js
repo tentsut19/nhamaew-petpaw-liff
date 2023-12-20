@@ -16,11 +16,11 @@ async function initializeLiff() {
       console.log(userId);
     }
 
-    // if (!liff.isLoggedIn()) {
-    //     const destinationUrl = window.location.href;
-    //     liff.login({redirectUri: destinationUrl});
-    //     return;
-    // }
+    if (!liff.isLoggedIn()) {
+        const destinationUrl = window.location.href;
+        liff.login({redirectUri: destinationUrl});
+        return;
+    }
 
 }
 
