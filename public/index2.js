@@ -250,9 +250,12 @@ function addressDetailText(ele,limit){
             return true;
         }
     }else{
+        document.getElementById('addressDetailTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
         document.getElementById('addressDetailText').innerHTML = '0/100';
         ele.classList.remove("is-invalid");
-        return true;
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
     }
 }
 
