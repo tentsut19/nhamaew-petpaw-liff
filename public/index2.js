@@ -252,7 +252,7 @@ function addressDetailText(ele,limit){
     }else{
         document.getElementById('addressDetailTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
         document.getElementById('addressDetailText').innerHTML = '0/100';
-        ele.classList.remove("is-invalid");
+        ele.classList.add("is-invalid");
         ele.scrollIntoView({ behavior: 'auto' });
         window.scrollBy(0, -40);
         return false;
