@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ส่งข้อมูลเพื่อให้โรงพยาบาลติดต่อกลับ</title>
+    <link rel="icon" type="image/png" href="petpaw.png">
+    <!-- เรียกใช้ Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" src="custom.css">
+    <style>
+        .error-border {
+            border-color: red !important;
+        }
+        label{
+            font-size: 1.6em;
+            display: block;
+        }
+        #overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 4%;
+        opacity: .80;
+        }
+        .spinner {
+            margin: 0 auto;
+            height: 64px;
+            width: 64px;
+            animation: rotate 0.8s infinite linear;
+            border: 5px solid firebrick;
+            border-right-color: transparent;
+            border-radius: 50%;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @font-face {
+            font-family: 'FC Iconic Regular';
+            src: url('FC-Iconic/FC Iconic Regular.ttf') format('truetype');
+            /* You may need additional format declarations depending on your font file */
+        }
+        body {
+            font-family: 'FC Iconic Regular', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display:none;">
+        <div class="spinner"></div>
+        <br/>
+        กำลังส่งข้อมูลเพื่อให้โรงพยาบาลติดต่อกลับ
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script src="liff-config.js?cache=202402181437"></script>
+    <script src="send-info.js?cache=202402181437"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

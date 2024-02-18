@@ -16,7 +16,7 @@ async function initializeLiff() {
       console.log(userId);
     }
 
-    if (!liff.isLoggedIn()) {
+    if (!liff.isLoggedIn() && PROD) {
         const destinationUrl = window.location.href;
         liff.login({redirectUri: destinationUrl});
         return;

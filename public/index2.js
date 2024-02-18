@@ -6,7 +6,7 @@ async function initializeLiff() {
     console.log('--- initializeLiff ---')
     await liff.init({ liffId: LIFF_ID });
 
-    if (!liff.isLoggedIn()) {
+    if (!liff.isLoggedIn() && PROD) {
         const destinationUrl = window.location.href;
         liff.login({redirectUri: destinationUrl});
         return;
@@ -380,11 +380,7 @@ async function submit(){
 
         document.getElementById("buttonSubmit").disabled = true;
 
-        var url = "https://cabsat-api.easynet.co.th/api/v1/cat-bot/create/consult-veterinarian";
-        // var url = "https://cat-bot-api.com/api/v1/cat-bot/create/consult-veterinarian";
-        // var url = "https://f14c-184-22-106-189.ngrok-free.app/api/v1/cat-bot/create/consult-veterinarian";
-
-        const response = await fetch(url, {
+        const response = await fetch(URL_CONSULT_VETERINARIAN, {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
