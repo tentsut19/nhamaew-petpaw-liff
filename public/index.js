@@ -195,3 +195,43 @@ function nextPage(){
     // Redirect to html2.html
     window.location.href = url;
 }
+
+async function checkFriendship(){
+    try {
+        if (!liff.isLoggedIn() && PROD) {
+            const destinationUrl = window.location.href;
+            liff.login({redirectUri: destinationUrl});
+            return;
+        }
+
+        var profile
+        if (PROD) {
+            profile = await liff.getProfile();
+        }else{
+            profile = profileTest;
+        }
+
+        document.getElementById("overlay").style.display = "block";
+
+        const response = await fetch(`https://api.line.me/friendship/v1/status?userMid=${profile.userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${CHANNEL_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        document.getElementById("overlay").style.display = "none";
+        console.log('response:', response);
+        if(response.status == 200){
+            if (response.data.friendFlag) {
+                swalError('ผู้ใช้เป็นเพื่อนกับ Line OA','');
+            } else {
+                swalError('ผู้ใช้ไม่เป็นเพื่อนกับ Line OA','');
+            }
+        }else{
+            swalError('ผู้ใช้ไม่เป็นเพื่อนกับ Line OA','');
+        }
+    } catch (error) {
+        console.error('API Error:', error);
+    }
+}

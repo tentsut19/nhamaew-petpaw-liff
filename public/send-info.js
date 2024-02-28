@@ -51,7 +51,9 @@ async function initializeLiff() {
         console.log('response:', response);
         if(response.status == 200){
             swalSuccess('ส่งข้อมูลเพื่อให้โรงพยาบาลติดต่อกลับเรียบร้อย','');
-            setTimeout(liff.closeWindow(), 1500);
+            setTimeout(function() {
+                liff.closeWindow();
+              }, 3000);
         }else{
             swalError('เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง','');
         }
@@ -68,7 +70,7 @@ function swalSuccess(title,text){
         text: text,
         icon: 'success',
         showConfirmButton: false,
-        timer: 1500
+        timer: 3000
       })
 }
 
