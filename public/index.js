@@ -22,6 +22,23 @@ async function initializeLiff() {
         return;
     }
 
+    friendship = await liff.getFriendship();
+    console.log(friendship);
+    if(!friendship.friendFlag){
+        Swal.fire({
+            //   title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
+            //   text: "เมื่อกดยืนยัน คุณจะได้รับเลขนัดปรึกษาสัตวแพทย์ทางไลน์ หากไม่ได้รับกรุณาติดต่อแอดมิน",
+            html: "<b style='font-size: 24px;'>ปรึกษาสัตวแพทย์ฟรี<br>เฉพาะผู้ที่เป็นเพื่อนกับ LINE<br>หน้าแมวเอไอ (Nhamaew Ai) เท่านั้น</b><br><br><label style='font-size: 20px;'></label>",
+            icon: 'warning',
+            showCancelButton: false,
+            allowOutsideClick: false,
+            confirmButtonColor: '#06c755',
+            confirmButtonText: 'เพิ่มเพื่อน Nhamaew Ai'
+        }).then((result) => {
+            console.log(result);
+            window.location.href = "https://lin.ee/ZHdJ99P";
+        })
+    }
 }
 
 function validateValue(){
@@ -211,26 +228,6 @@ async function checkFriendship(){
             profile = profileTest;
         }
 
-        document.getElementById("overlay").style.display = "block";
-
-        const response = await fetch(`https://api.line.me/friendship/v1/status?userMid=${profile.userId}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${CHANNEL_ACCESS_TOKEN}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        document.getElementById("overlay").style.display = "none";
-        console.log('response:', response);
-        if(response.status == 200){
-            if (response.data.friendFlag) {
-                swalError('ผู้ใช้เป็นเพื่อนกับ Line OA','');
-            } else {
-                swalError('ผู้ใช้ไม่เป็นเพื่อนกับ Line OA','');
-            }
-        }else{
-            swalError('ผู้ใช้ไม่เป็นเพื่อนกับ Line OA','');
-        }
     } catch (error) {
         console.error('API Error:', error);
     }
