@@ -28,7 +28,7 @@ async function initializeLiff() {
         Swal.fire({
             //   title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
             //   text: "เมื่อกดยืนยัน คุณจะได้รับเลขนัดปรึกษาสัตวแพทย์ทางไลน์ หากไม่ได้รับกรุณาติดต่อแอดมิน",
-            html: "<b style='font-size: 24px;'>ปรึกษาสัตวแพทย์ฟรี<br>เฉพาะผู้ที่เป็นเพื่อนกับ LINE<br>หน้าแมวเอไอ (Nhamaew Ai) เท่านั้น</b><br><br><label style='font-size: 20px;'></label>",
+            html: "<b style='font-size: 24px;'>ปรึกษาสัตวแพทย์ฟรีครั้งแรก<br>เฉพาะผู้ที่เป็นเพื่อนกับ LINE<br>หน้าแมวเอไอ (Nhamaew Ai) เท่านั้น</b><br><br><label style='font-size: 20px;'></label>",
             icon: 'warning',
             showCancelButton: false,
             allowOutsideClick: false,
