@@ -31,9 +31,9 @@ function closeSwal(){
 
 function openDialogConfirm(){
     Swal.fire({
-    //   title: 'ยืนยันการส่งข้อมูลใช่ไหม?',
+      title: 'ยืนยันการส่งข้อมูลใช่ไหม',
     //   text: "เมื่อกดยืนยัน คุณจะได้รับเลขนัดปรึกษาสัตวแพทย์ทางไลน์ หากไม่ได้รับกรุณาติดต่อแอดมิน",
-      html: "<b style='font-size: 24px;'>ยืนยันการส่งข้อมูลใช่ไหม</b><br><br><label style='font-size: 20px;'>เมื่อกดยืนยัน คุณจะได้รับเลขนัดปรึกษาสัตวแพทย์ทางไลน์ หากไม่ได้รับกรุณาติดต่อแอดมิน</label>",
+    //   html: "<b style='font-size: 24px;'>ยืนยันการส่งข้อมูลใช่ไหม</b><br><br><label style='font-size: 20px;'>เมื่อกดยืนยัน คุณจะได้รับเลขนัดปรึกษาสัตวแพทย์ทางไลน์ หากไม่ได้รับกรุณาติดต่อแอดมิน</label>",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -410,13 +410,31 @@ async function submit(){
                 zipcode: zipcode,
                 ownerName: ownerNameValue,
                 phoneNumber: phoneNumberValue,
-                email: emailValue
+                email: emailValue,
+                partner: 'MOYA'
             })
         });
 
         const data = await response.json();
         console.log('API Response:', data);
-        liff.closeWindow();
+        // liff.closeWindow();
+        Swal.fire({
+            // title: "ส่งข้อมูลเรียบร้อยแล้ว",
+            // text: "กรุณากดเพิ่มเพื่อน LINE official ที่หน้าต่อไปนี้ และพิมพ์แจ้งว่า ”ปรึกษาสัตวแพทย์” มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ",
+            html: "<label style='font-size: 20px;'>ส่งข้อมูลเรียบร้อยแล้ว</label><label style='font-size: 20px;'>กรุณากดเพิ่มเพื่อน LINE official ในหน้าต่อไปนี้ และ</label><label style='font-size: 20px;'>พิมพ์แจ้งว่า ”ปรึกษาสัตวแพทย์”</label><br><br><label style='font-size: 20px;color:red;'>มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ</label>",
+            allowOutsideClick: false,
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'รับทราบ',
+        }).then((result) => {
+            // if (result.isConfirmed) {
+            //   submit()
+            // }
+            liff.openWindow({
+                url: 'https://lin.ee/jADkA4a',
+                external: false
+            });
+        })
     } catch (error) {
         alert('เกิดข้อผิดพลาด');
         console.error('API Error:', error);
