@@ -421,10 +421,11 @@ async function submit(){
         Swal.fire({
             // title: "ส่งข้อมูลเรียบร้อยแล้ว",
             // text: "กรุณากดเพิ่มเพื่อน LINE official ที่หน้าต่อไปนี้ และพิมพ์แจ้งว่า ”ปรึกษาสัตวแพทย์” มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ",
-            html: "<label style='font-size: 20px;'>ส่งข้อมูลเรียบร้อยแล้ว</label><label style='font-size: 20px;'>กรุณากดเพิ่มเพื่อน LINE official ในหน้าต่อไปนี้ และ</label><label style='font-size: 20px;'>พิมพ์แจ้งว่า ”ปรึกษาสัตวแพทย์”</label><br><br><label style='font-size: 20px;color:red;'>มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ</label>",
+            html: "<label style='font-size: 20px;'>หลังจากทำการส่งข้อมูลขอปรึกษาสัตวแพทย์เรียบร้อยแล้ว กรุณาทำตามขั้นตอนต่อไปนี้ครับ</label><br><label style='font-size: 20px;'>1. เพิ่มเพื่อนไลน์ MOYA PET CARE ที่หน้าต่อไปนี้</label><br><label style='font-size: 20px;'>2. พิมพ์คำว่า \"ปรึกษาสัตวแพทย์\" ในไลน์ MOYA PET CARE และรอการตอบกลับจากสัตวแพทย์ได้เลย</label><br><label style='font-size: 20px;color:red;'>มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ</label>",
             allowOutsideClick: false,
             showCancelButton: false,
             showConfirmButton: true,
+            confirmButtonColor: '#ff0000',
             confirmButtonText: 'รับทราบ',
         }).then((result) => {
             // if (result.isConfirmed) {
