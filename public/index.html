@@ -72,16 +72,24 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <div style="text-align: center;">
-                                <b style="font-size: 18px;color: #B37B38;">กรุณากรอกข้อมูลน้องแมวของคุณเพียงเล็กน้อย</b><br>
-                                <b style="font-size: 22px;color: #B37B38;">เพื่อช่วยให้สัตวแพทย์ทราบข้อมูลเบื้องต้น</b>
+                            <div style="text-align: center;margin-bottom: 14px;">
+                                <b style="font-size: 14px;color: #B37B38;">กรุณากรอกข้อมูลสัตว์เลี้ยงของคุณเพียงเล็กน้อย</b><br>
+                                <b style="font-size: 16px;color: #B37B38;">ช่วยให้สัตวแพทย์ทราบข้อมูลเบื้องต้น</b>
                             </div>
-                            <b style="font-size: 22px;">1. ข้อมูลน้องแมว</b>
+                            <b style="font-size: 22px;">1. ข้อมูลสัตว์เลี้ยง</b>
                             
+                            <div class="mb-3">
+                                <label for="breeds" class="form-label">ประเภทสัตว์เลี้ยง</label>
+                                <select class="form-control" id="petType" onchange="changePetType()">
+                                    <option value="CAT">น้องแมว</option>
+                                    <option value="DOG">น้องหมา</option>
+                                </select>
+                            </div>
+
                             <div class="mb-3" style="margin-top: 10px;">
-                                <label for="nameCat" class="form-label">ชื่อน้องแมว</label>
+                                <label for="nameCat" class="form-label">ชื่อสัตว์เลี้ยง</label>
                                 <div class="input-group mb-2">
-                                    <input type="input" class="form-control" id="nameCat" placeholder="ชื่อน้องแมว" onkeyup="nameCatText(this,100)">
+                                    <input type="input" class="form-control" id="nameCat" placeholder="ชื่อสัตว์เลี้ยง" onkeyup="nameCatText(this,100)">
                                     <div class="input-group-prepend">
                                       <div id="nameCatText" class="input-group-text">0/100</div>
                                     </div>
@@ -90,40 +98,101 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-3" id="catBreed">
                                 <label for="breeds" class="form-label">สายพันธุ์ (Breeds)</label>
-                                <select class="form-control" id="breedsSelect" onchange="changeBreedsSelect()">
+                                <select class="form-control" id="catBreedsSelect" onchange="changeCatBreedsSelect()">
                                     <option value="">-- สายพันธุ์ --</option>
-                                    <option value="แมวเปอร์เซีย">แมวเปอร์เซีย</option>
-                                    <option value="แมวอเมริกัน ชอร์ตแฮร์">แมวอเมริกัน ชอร์ตแฮร์</option>
-                                    <option value="แมวสก็อตติช โฟลด์">แมวสก็อตติช โฟลด์</option>
                                     <option value="แมวไทย / แมวบ้าน">แมวไทย / แมวบ้าน</option>
-                                    <option value="แมววิเชียรมาศ">แมววิเชียรมาศ</option>
-                                    <option value="แมวโคราช">แมวโคราช</option>
-                                    <option value="แมวขาวมณี">แมวขาวมณี</option>
-                                    <option value="แมวบริติช ชอร์ตแฮร์">แมวบริติช ชอร์ตแฮร์</option>
-                                    <option value="แมวเอ็กโซติก">แมวเอ็กโซติก</option>
-                                    <option value="แมวเมนคูน">แมวเมนคูน</option>
-                                    <option value="แมวเบงกอล">แมวเบงกอล</option>
-                                    <option value="สฟิงซ์">สฟิงซ์</option>
+                                    <option value="ขาวมณี">ขาวมณี</option>
                                     <option value="คาราคัล">คาราคัล</option>
-                                    <option value="ลิงซ์ยูเรเชีย">ลิงซ์ยูเรเชีย</option>
+                                    <option value="โคราช / สีสวาด">โคราช / สีสวาด</option>
+                                    <option value="ชินชิล่า">ชินชิล่า</option>
                                     <option value="เซอร์วัล">เซอร์วัล</option>
-                                    <option value="อเมริกันบ็อบเทล">อเมริกันบ็อบเทล</option>
+                                    <option value="นอร์วีเจียน ฟอเรสต์">นอร์วีเจียน ฟอเรสต์</option>
+                                    <option value="บริติช ช็อตแฮร์">บริติช ช็อตแฮร์</option>
+                                    <option value="เบงกอล">เบงกอล</option>
+                                    <option value="เปอร์เซีย">เปอร์เซีย</option>
+                                    <option value="มันช์กิ้น">มันช์กิ้น</option>
+                                    <option value="เมนคูน">เมนคูน</option>
+                                    <option value="รัสเซียนบลู">รัสเซียนบลู</option>
+                                    <option value="แร็กดอล">แร็กดอล</option>
+                                    <option value="ลิงซ์ยูเรเชีย">ลิงซ์ยูเรเชีย</option>
+                                    <option value="วิเชียรมาศ">วิเชียรมาศ</option>
+                                    <option value="สก็อตติช โฟลด์">สก็อตติช โฟลด์</option>
+                                    <option value="สฟิงซ์">สฟิงซ์</option>
+                                    <option value="อเมริกัน ช็อตแฮร์">อเมริกัน ช็อตแฮร์</option>
                                     <option value="อเมริกันเคิร์ล">อเมริกันเคิร์ล</option>
+                                    <option value="อเมริกันบ๊อบเทล">อเมริกันบ๊อบเทล</option>
+                                    <option value="อะบิสซิเนียน">อะบิสซิเนียน</option>
+                                    <option value="เอ็กโซติก ช็อตแฮร์">เอ็กโซติก ช็อตแฮร์</option>
+                                    <option value="โอเรียนทัล ช็อตแฮร์">โอเรียนทัล ช็อตแฮร์</option>
                                     <option value="พันธุ์ผสม">พันธุ์ผสม</option>
                                     <option value="อื่นๆ">อื่นๆ</option>
                                 </select>
-                                <div id="divBreedsInput" class="input-group mb-2" style="display: none;" >
-                                    <input type="input" class="form-control" id="breedsInput" placeholder="ชื่อสายพันธุ์แมว" onkeyup="breedsInputText(this,100)">
+                                <div id="divCatBreedsInput" class="input-group mb-2" style="display: none;" >
+                                    <input type="input" class="form-control" id="catBreedsInput" placeholder="ชื่อสายพันธุ์แมว" onkeyup="catBreedsInputText(this,100)">
                                     <div class="input-group-prepend">
-                                      <div id="breedsInputText" class="input-group-text">0/100</div>
+                                      <div id="catBreedsInputText" class="input-group-text">0/100</div>
                                     </div>
-                                    <div id="breedsInputTextInvalid" class="invalid-feedback">
+                                    <div id="catBreedsInputTextInvalid" class="invalid-feedback">
                                         กรุณากรอกข้อมูล
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="mb-3" id="dogBreed" style="display: none;">
+                                <label for="breeds" class="form-label">สายพันธุ์ (Breeds)</label>
+                                <select class="form-control" id="dogBreedsSelect" onchange="changeDogBreedsSelect()">
+                                    <option value="">-- สายพันธุ์ --</option>
+                                    <option value="พันธุ์ไทย (ไทยหลังอาน)">พันธุ์ไทย (ไทยหลังอาน)</option>
+                                    <option value="เกรย์ฮาวด์">เกรย์ฮาวด์</option>
+                                    <option value="โกลเด้น รีทรีฟเวอร์">โกลเด้น รีทรีฟเวอร์</option>
+                                    <option value="คอร์กี้">คอร์กี้</option>
+                                    <option value="คอลลี่">คอลลี่</option>
+                                    <option value="แจ็ครัสเซลล์ เทอร์เรีย">แจ็ครัสเซลล์ เทอร์เรีย</option>
+                                    <option value="ชเนาเซอร์">ชเนาเซอร์</option>
+                                    <option value="ชิบะ">ชิบะ</option>
+                                    <option value="ชิวาวา">ชิวาวา</option>
+                                    <option value="ชิสุ">ชิสุ</option>
+                                    <option value="เชา เชา">เชา เชา</option>
+                                    <option value="เซนต์เบอร์นาร์ด">เซนต์เบอร์นาร์ด</option>
+                                    <option value="ไซบีเรียน ฮัสกี้">ไซบีเรียน ฮัสกี้</option>
+                                    <option value="ดัชชุน">ดัชชุน</option>
+                                    <option value="ดัลเมเชี่ยน">ดัลเมเชี่ยน</option>
+                                    <option value="โดเบอร์แมน">โดเบอร์แมน</option>
+                                    <option value="บอร์เดอร์ คอลลี่">บอร์เดอร์ คอลลี่</option>
+                                    <option value="บางแก้ว">บางแก้ว</option>
+                                    <option value="บิชอง ฟริเซ่">บิชอง ฟริเซ่</option>
+                                    <option value="บีเกิ้ล">บีเกิ้ล</option>
+                                    <option value="บูลด็อก">บูลด็อก</option>
+                                    <option value="บูลเทอร์เรีย">บูลเทอร์เรีย</option>
+                                    <option value="ปอมเมอเรเนียน">ปอมเมอเรเนียน</option>
+                                    <option value="ปั๊ก">ปั๊ก</option>
+                                    <option value="พิทบูล">พิทบูล</option>
+                                    <option value="พินเชอร์">พินเชอร์</option>
+                                    <option value="พุดเดิ้ล">พุดเดิ้ล</option>
+                                    <option value="เฟรนช์ บูลด็อก">เฟรนช์ บูลด็อก</option>
+                                    <option value="มอลทีส">มอลทีส</option>
+                                    <option value="ยอร์คเชียร์ เทอร์เรียร์">ยอร์คเชียร์ เทอร์เรียร์</option>
+                                    <option value="เยอรมันเชพเพิร์ด">เยอรมันเชพเพิร์ด</option>
+                                    <option value="ร็อตไวเลอร์">ร็อตไวเลอร์</option>
+                                    <option value="ลาซา แอปโซ">ลาซา แอปโซ</option>
+                                    <option value="ลาบราดอร์">ลาบราดอร์</option>
+                                    <option value="อลาสกัน มาลามิวท์">อลาสกัน มาลามิวท์</option>
+                                    <option value="พันธุ์ผสม">พันธุ์ผสม</option>
+                                    <option value="อื่นๆ">อื่นๆ</option>
+                                </select>
+                                <div id="divDogBreedsInput" class="input-group mb-2" style="display: none;" >
+                                    <input type="input" class="form-control" id="dogBreedsInput" placeholder="ชื่อสายพันธุ์สุนัข" onkeyup="dogBreedsInputText(this,100)">
+                                    <div class="input-group-prepend">
+                                      <div id="dogBreedsInputText" class="input-group-text">0/100</div>
+                                    </div>
+                                    <div id="dogBreedsInputTextInvalid" class="invalid-feedback">
+                                        กรุณากรอกข้อมูล
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="year" class="form-label">อายุ (โดยประมาณ)</label>
                                 <div class="input-group mb-2">
@@ -144,9 +213,9 @@
                                     <input type="number" class="form-control" id="month">
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" id="divCatWeightRange">
                                 <label for="weightRange" class="form-label">น้ำหนักโดยประมาณ</label>
-                                <select class="form-control" id="weightRange" >
+                                <select class="form-control" id="weightRangeCat" >
                                     <option value="">-- น้ำหนักโดยประมาณ --</option>
                                     <option value="1.2-">น้อยกว่า 1.2 kg</option>
                                     <option value="1.2-2.8">1.2-2.8 kg</option>
@@ -155,10 +224,23 @@
                                     <option value="12.5+">มากกว่า 12.5 kg</option>
                                 </select>
                             </div>
+                            <div class="mb-3" id="divDogWeightRange" style="display: none;">
+                                <label for="weightRange" class="form-label">น้ำหนักโดยประมาณ</label>
+                                <select class="form-control" id="weightRangeDog" >
+                                    <option value="">-- น้ำหนักโดยประมาณ --</option>
+                                    <option value="2-">น้อยกว่า 2 kg</option>
+                                    <option value="2-4.5">2-4.5 kg</option>
+                                    <option value="4.5-10">4.5-10 kg</option>
+                                    <option value="10-20">10-20 kg</option>
+                                    <option value="20-40">20-40 kg</option>
+                                    <option value="40-56">40-56 kg</option>
+                                    <option value="56+">มากกว่า 56 kg</option>
+                                </select>
+                            </div>
                             <div class="mb-3">
-                                <label for="genderCat" class="form-label">เพศแมว</label>
+                                <label for="genderCat" class="form-label">เพศสัตว์เลี้ยง</label>
                                 <select class="form-control" id="genderCat" >
-                                    <option value="">-- เพศแมว --</option>
+                                    <option value="">-- เพศสัตว์เลี้ยง --</option>
                                     <option value="เพศผู้">เพศผู้</option>
                                     <option value="เพศเมีย">เพศเมีย</option>
                                     <option value="ไม่ระบุ">ไม่ระบุ</option>

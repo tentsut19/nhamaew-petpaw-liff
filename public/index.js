@@ -42,10 +42,27 @@ async function initializeLiff() {
 }
 
 function validateValue(){
+    var valid = true;
+
     var nameCat = document.getElementById("nameCat");
-    var weightRange = document.getElementById("weightRange");
+    var petTypeSelect = document.getElementById("petType").value;
+    if("CAT" == petTypeSelect){
+        var weightRange = document.getElementById("weightRangeCat");
+        var breedsSelect = document.getElementById("catBreedsSelect");
+        if("อื่นๆ" == breedsSelect.value){
+            var breedsInput = document.getElementById("catBreedsInput");
+            valid = valid && catBreedsInputText(breedsInput,100);
+        }
+    }else if("DOG" == petTypeSelect){
+        var weightRange = document.getElementById("weightRangeDog");
+        var breedsSelect = document.getElementById("dogBreedsSelect");
+        if("อื่นๆ" == breedsSelect.value){
+            var breedsInput = document.getElementById("dogBreedsInput");
+            valid = valid && dogBreedsInputText(breedsInput,100);
+        }
+    }
     var genderCat = document.getElementById("genderCat");
-    var breedsSelect = document.getElementById("breedsSelect");
+    //var breedsSelect = document.getElementById("breedsSelect");
     // var year = document.getElementById("year");
     // var month = document.getElementById("month");
     var sterilization = document.getElementById("sterilization");
@@ -55,13 +72,13 @@ function validateValue(){
     var congenitalDisease = document.getElementById("congenitalDisease");
     var initialSymptoms = document.getElementById("initialSymptoms");
 
-    var valid = true;
+    
     valid = valid && nameCatText(nameCat,100);
     valid = valid && addOrRemoveClassIsInvalid(breedsSelect);
-    if("อื่นๆ" == breedsSelect.value){
-        var breedsInput = document.getElementById("breedsInput");
-        valid = valid && breedsInputText(breedsInput,100);
-    }
+    // if("อื่นๆ" == breedsSelect.value){
+    //     var breedsInput = document.getElementById("breedsInput");
+    //     valid = valid && breedsInputText(breedsInput,100);
+    // }
     valid = valid && addOrRemoveClassIsInvalid(weightRange);
     valid = valid && addOrRemoveClassIsInvalid(genderCat);
     // valid = valid && addOrRemoveClassIsInvalid(year);
@@ -124,23 +141,47 @@ function nameCatText(ele,limit){
     }
 }
 
-function breedsInputText(ele,limit){
+function catBreedsInputText(ele,limit){
     if(ele && ele.value){
-        document.getElementById('breedsInputText').innerHTML = ele.value.length+'/100';
+        document.getElementById('catBreedsInputText').innerHTML = ele.value.length+'/100';
         if(ele.value.length > limit){
-            document.getElementById('breedsInputTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            document.getElementById('catBreedsInputTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
             ele.classList.add("is-invalid");
             ele.scrollIntoView({ behavior: 'auto' });
             window.scrollBy(0, -40);
             return false;
         }else{
-            document.getElementById('breedsInputTextInvalid').innerHTML = '';
+            document.getElementById('catBreedsInputTextInvalid').innerHTML = '';
             ele.classList.remove("is-invalid");
             return true;
         }
     }else{
-        document.getElementById('breedsInputTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
-        document.getElementById('breedsInputText').innerHTML = '0/100';
+        document.getElementById('catBreedsInputTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('catBreedsInputText').innerHTML = '0/100';
+        ele.classList.add("is-invalid");
+        ele.scrollIntoView({ behavior: 'auto' });
+        window.scrollBy(0, -40);
+        return false;
+    }
+}
+
+function dogBreedsInputText(ele,limit){
+    if(ele && ele.value){
+        document.getElementById('dogBreedsInputText').innerHTML = ele.value.length+'/100';
+        if(ele.value.length > limit){
+            document.getElementById('dogBreedsInputTextInvalid').innerHTML = 'ข้อความเกินที่กำหนด';
+            ele.classList.add("is-invalid");
+            ele.scrollIntoView({ behavior: 'auto' });
+            window.scrollBy(0, -40);
+            return false;
+        }else{
+            document.getElementById('dogBreedsInputTextInvalid').innerHTML = '';
+            ele.classList.remove("is-invalid");
+            return true;
+        }
+    }else{
+        document.getElementById('dogBreedsInputTextInvalid').innerHTML = 'กรุณากรอกข้อมูล';
+        document.getElementById('dogBreedsInputText').innerHTML = '0/100';
         ele.classList.add("is-invalid");
         ele.scrollIntoView({ behavior: 'auto' });
         window.scrollBy(0, -40);
@@ -169,23 +210,60 @@ function congenitalDiseaseText(ele,limit){
     }
 }
 
-function changeBreedsSelect(){
-    var breedsSelect = document.getElementById("breedsSelect").value;
+function changePetType(){
+    var petTypeSelect = document.getElementById("petType").value;
+    if("CAT" == petTypeSelect){
+        document.getElementById("divCatWeightRange").style.display = '';
+        document.getElementById("divDogWeightRange").style.display = 'none';
+
+        document.getElementById("catBreed").style.display = '';
+        document.getElementById("dogBreed").style.display = 'none';
+    }else if("DOG" == petTypeSelect){
+        document.getElementById("divDogWeightRange").style.display = '';
+        document.getElementById("divCatWeightRange").style.display = 'none';
+
+        document.getElementById("dogBreed").style.display = '';
+        document.getElementById("catBreed").style.display = 'none';
+    }
+}
+
+function changeDogBreedsSelect(){
+    var breedsSelect = document.getElementById("dogBreedsSelect").value;
     if("อื่นๆ" == breedsSelect){
-        document.getElementById("divBreedsInput").style.display = '';
+        document.getElementById("divDogBreedsInput").style.display = '';
     }else{
-        document.getElementById("divBreedsInput").style.display = 'none';
+        document.getElementById("divDogBreedsInput").style.display = 'none';
+    }
+}
+
+function changeCatBreedsSelect(){
+    var breedsSelect = document.getElementById("catBreedsSelect").value;
+    if("อื่นๆ" == breedsSelect){
+        document.getElementById("divCatBreedsInput").style.display = '';
+    }else{
+        document.getElementById("divCatBreedsInput").style.display = 'none';
     }
 }
 
 function nextPage(){
     var nameCatValue = document.getElementById("nameCat").value;
-    var weightRangeValue = document.getElementById("weightRange").value;
-    var genderCatValue = document.getElementById("genderCat").value;
-    var breedsValue = document.getElementById("breedsSelect").value;
-    if("อื่นๆ" == breedsValue){
-        breedsValue = document.getElementById("breedsInput").value;
+
+    var petTypeSelect = document.getElementById("petType").value;
+    if("CAT" == petTypeSelect){
+        var weightRangeValue = document.getElementById("weightRangeCat").value;
+        var breedsValue = document.getElementById("catBreedsSelect").value;
+        if("อื่นๆ" == breedsValue){
+            breedsValue = document.getElementById("catBreedsInput").value;
+        }
+    }else if("DOG" == petTypeSelect){
+        var weightRangeValue = document.getElementById("weightRangeDog").value;
+        var breedsValue = document.getElementById("dogBreedsSelect").value;
+        if("อื่นๆ" == breedsValue){
+            breedsValue = document.getElementById("dogBreedsInput").value;
+        }
     }
+
+    var genderCatValue = document.getElementById("genderCat").value;
     var yearValue = document.getElementById("year").value;
     var monthValue = document.getElementById("month").value;
     var sterilizationValue = document.getElementById("sterilization").value;
@@ -194,6 +272,7 @@ function nextPage(){
     var surgeryValue = document.getElementById("surgery").value;
     var congenitalDiseaseValue = document.getElementById("congenitalDisease").value;
     var initialSymptomsValue = document.getElementById("initialSymptoms").value;
+    var petTypeValue = document.getElementById("petType").value;
 
     // Encode the values and construct the URL
     var url = "index2.html?nameCat=" + encodeURIComponent(nameCatValue) + 
@@ -207,7 +286,8 @@ function nextPage(){
     "&historyDrugAllergy=" + encodeURIComponent(historyDrugAllergyValue) + 
     "&surgery=" + encodeURIComponent(surgeryValue) + 
     "&congenitalDisease=" + encodeURIComponent(congenitalDiseaseValue) + 
-    "&initialSymptoms=" + encodeURIComponent(initialSymptomsValue);
+    "&initialSymptoms=" + encodeURIComponent(initialSymptomsValue) +
+    "&petType=" + encodeURIComponent(petTypeValue);
     
     // Redirect to html2.html
     window.location.href = url;

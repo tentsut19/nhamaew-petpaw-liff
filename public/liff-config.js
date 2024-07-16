@@ -1,5 +1,5 @@
 // const LIFF_ID = '2002126306-rG8n6Bnp';
-const LIFF_ID = '2002133356-0JOe1MzY';
+const LIFF_ID = '2002133356-0JOe1MzY'; // prod
 const PROD = true;
 const DOMAIN = "https://test-api.net/";
 // const DOMAIN = "http://localhost:8091/";

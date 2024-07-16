@@ -353,6 +353,7 @@ async function submit(){
         var surgery = urlParams.get('surgery');
         var congenitalDisease = urlParams.get('congenitalDisease');
         var initialSymptoms = urlParams.get('initialSymptoms');
+        var petType = urlParams.get('petType');
         
         var nameCatValue = decodeURIComponent(nameCat);
         var weightRangeValue = decodeURIComponent(weightRange);
@@ -411,6 +412,7 @@ async function submit(){
                 ownerName: ownerNameValue,
                 phoneNumber: phoneNumberValue,
                 email: emailValue,
+                petType: petType,
                 partner: 'MOYA'
             })
         });
@@ -421,7 +423,7 @@ async function submit(){
         Swal.fire({
             // title: "ส่งข้อมูลเรียบร้อยแล้ว",
             // text: "กรุณากดเพิ่มเพื่อน LINE official ที่หน้าต่อไปนี้ และพิมพ์แจ้งว่า ”ปรึกษาสัตวแพทย์” มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ",
-            html: "<label style='font-size: 20px;'>หลังจากทำการส่งข้อมูลขอปรึกษาสัตวแพทย์เรียบร้อยแล้ว กรุณาทำตามขั้นตอนต่อไปนี้ครับ</label><br><label style='font-size: 20px;'>1. เพิ่มเพื่อนไลน์ MOYA PET CARE ที่หน้าต่อไปนี้</label><br><label style='font-size: 20px;'>2. พิมพ์คำว่า \"ปรึกษาสัตวแพทย์\" ในไลน์ MOYA PET CARE และรอการตอบกลับจากสัตวแพทย์ได้เลย</label><br><label style='font-size: 20px;color:red;'>มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ</label>",
+            html: "<label style='font-size: 16px;'>หลังจากทำการส่งข้อมูลขอปรึกษาสัตวแพทย์เรียบร้อยแล้ว กรุณาทำตามขั้นตอนต่อไปนี้ครับ</label><br><label style='font-size: 16px;'>1. เพิ่มเพื่อนไลน์ MOYA PET CARE ที่หน้าต่อไปนี้</label><br><label style='font-size: 16px;'>2. พิมพ์คำว่า \"ปรึกษาสัตวแพทย์\" ในไลน์ MOYA PET CARE และรอการตอบกลับจากสัตวแพทย์ได้เลย</label><br><label style='font-size: 16px;color:red;'>มิฉะนั้นสัตวแพทย์จะไม่สามารถติดต่อกลับหาคุณได้ครับ</label><br><label style='font-size: 16px;color:red;'>สัตวแพทย์จะตอบกลับในเวลาทำการ 10.00-20.00 น.ของทุกวันครับ</label>",
             allowOutsideClick: false,
             showCancelButton: false,
             showConfirmButton: true,
