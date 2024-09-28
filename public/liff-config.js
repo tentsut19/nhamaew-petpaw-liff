@@ -1,7 +1,7 @@
 // const LIFF_ID = '2002126306-rG8n6Bnp';
 const LIFF_ID = '2002133356-0JOe1MzY'; // prod
 const PROD = true;
-const DOMAIN = "https://test-api.net/";
+const DOMAIN = "https://nhamaew.net/";
 // const DOMAIN = "http://localhost:8091/";
 
 const CHANNEL_ACCESS_TOKEN = 'gerVLh1F6zcDgwvH8GdLZ3/b+W4rnlWeueKDFDYtRuJw1DHmGqGW9P8ZOutYFJxt0MIT/UhZ07/SLZ0eEX8eCttm13eCVfW/OGIOAc6ZWT9JawWCPAvlAHUIsrH7ouReeZtni0g6SsjrV6an7Vqa1wdB04t89/1O/w1cDnyilFU=';
